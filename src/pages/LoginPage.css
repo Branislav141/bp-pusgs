@@ -1,0 +1,70 @@
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+html {
+  background-image: url("../photos/Slika1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.Form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  width: 500px;
+  min-height: 200px;
+  background-color: lightblue;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.email {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.faceicon {
+  width: 60px;
+  height: 60px;
+  background-image: url("../photos/facebook.png");
+  background-size: 100%;
+  border-radius: 10px;
+}
+
+.or {
+  font-size: 20px;
+  font-style: inherit;
+  font-weight: bold;
+}
+::placeholder {
+  text-align: center;
+}
