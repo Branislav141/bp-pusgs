@@ -6,14 +6,20 @@ export default function LoginPage() {
     <div>
       <form className="Form">
         <br />
-        <label>Username</label>
-        <input type="text" placeholder="enter your username"></input>
 
         <label>Email</label>
         <input
           type="email"
           className="email"
           placeholder="enter your email"
+          id="email"
+        ></input>
+
+        <label>Password</label>
+        <input
+          className="password"
+          type="password"
+          placeholder="enter your password"
         ></input>
 
         <input type="submit" className="loginbutton" value="Login" />
