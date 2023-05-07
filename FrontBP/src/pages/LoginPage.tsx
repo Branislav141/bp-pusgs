@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import "./LoginPage.css";
 
 export default function LoginPage() {
@@ -29,6 +29,14 @@ export default function LoginPage() {
         <br />
         <div>
           <button className="faceicon"></button>
+        </div>
+
+        <hr></hr>
+
+        <div>
+          <Link to="/register">
+            <button className="regButton">Regiser</button>
+          </Link>
         </div>
       </form>
     </div>

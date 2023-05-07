@@ -1,0 +1,10 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-image: url("../photos/Slika1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -9,10 +9,21 @@ input[type="submit"] {
   cursor: pointer;
   font-size: 20px;
 }
-html {
-  background-image: url("../photos/Slika1.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
+input[type="submit"]:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.regButton {
+  width: 100%;
+  background-color: blue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .Form {
@@ -27,7 +38,9 @@ html {
 }
 
 .email,
-.password {
+.password,
+input[type="text"],
+input[type="date"] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -35,6 +48,7 @@ html {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  text-align: center;
 }
 
 button:hover {
