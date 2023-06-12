@@ -1,0 +1,41 @@
+.navbarU {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.menuO {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #333;
+  padding: 10px;
+  z-index: 1;
+}
+
+.menuO li {
+  margin-bottom: 10px;
+}
+
+.menuO button {
+  display: block;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.menuO button:hover {
+  text-decoration: underline;
+}
+
+.menuIc {
+  width: 40px;
+  height: 40px;
+}

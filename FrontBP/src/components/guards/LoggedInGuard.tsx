@@ -1,10 +1,18 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useTokenStore } from "../../store/useTokenStore";
+import NavbarUlogovani from "../navbarUlogovani/NavbarUlogovani";
 
 export default function LoggedInGuard() {
-  const jwt = null;
+  const token = useTokenStore().token;
 
-  //if (!jwt) return <Navigate to={"/login"} />;
+  if (!token) return <Navigate to={"/login"} />;
 
-  return <Outlet />;
+  return (
+    <>
+      {/* navbar za one koji su ulogovani */}
+      <NavbarUlogovani></NavbarUlogovani>
+      <Outlet />
+    </>
+  );
 }

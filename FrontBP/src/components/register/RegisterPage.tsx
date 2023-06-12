@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./RegisterPage.css";
+import RegisterPageCSS from "./RegisterPage.module.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function RegisterPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -14,6 +15,8 @@ function RegisterPage() {
     address: "",
     accountType: "",
   });
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files.length > 0) {
@@ -55,22 +58,31 @@ function RegisterPage() {
         formData
       );
       console.log("Registration successful:", response.data);
+
+      setRegistrationSuccess(true);
       // You can perform additional actions after successful registration
     } catch (error) {
       console.error("Registration error:", error);
+      setRegistrationSuccess(false);
       // Handle registration error
+    } finally {
+      setModalOpen(true);
     }
+  }
+
+  function closeModal() {
+    setModalOpen(false);
   }
 
   return (
     <div>
-      <form className="RegisterForm" onSubmit={handleSubmit}>
+      <form className={RegisterPageCSS.RegisterForm} onSubmit={handleSubmit}>
         <br />
 
         <label>Username</label>
         <input
           type="text"
-          className="username"
+          className={RegisterPageCSS.username}
           placeholder="enter your username"
           id="username"
           name="username"
@@ -81,7 +93,7 @@ function RegisterPage() {
         <label>Email</label>
         <input
           type="email"
-          className="email"
+          className={RegisterPageCSS.email}
           placeholder="enter your email"
           id="email"
           name="email"
@@ -91,7 +103,7 @@ function RegisterPage() {
 
         <label>Password</label>
         <input
-          className="password"
+          className={RegisterPageCSS.password}
           type="password"
           placeholder="enter your password"
           id="password"
@@ -103,7 +115,7 @@ function RegisterPage() {
         <label>Name</label>
         <input
           type="text"
-          className="name"
+          className={RegisterPageCSS.name}
           placeholder="enter your name"
           id="name"
           name="name"
@@ -114,7 +126,7 @@ function RegisterPage() {
         <label>Surname</label>
         <input
           type="text"
-          className="surname"
+          className={RegisterPageCSS.surname}
           placeholder="enter your surname"
           id="surname"
           name="surname"
@@ -125,7 +137,7 @@ function RegisterPage() {
         <label>Date of birth</label>
         <input
           type="date"
-          className="dateOfBirth"
+          className={RegisterPageCSS.date}
           placeholder="enter your date of birth"
           id="dateOfBirth"
           name="dateOfBirth"
@@ -136,7 +148,7 @@ function RegisterPage() {
         <label>Address</label>
         <input
           type="text"
-          className="address"
+          className={RegisterPageCSS.address}
           placeholder="enter your address"
           id="address"
           name="address"
@@ -146,7 +158,7 @@ function RegisterPage() {
 
         <label>Account type</label>
         <select
-          className="accountType"
+          className={RegisterPageCSS.accountType}
           id="accountType"
           name="accountType"
           value={formData.accountType}
@@ -166,8 +178,34 @@ function RegisterPage() {
           </button>
         </div>
 
-        <input type="submit" className="registerbutton" value="Register" />
+        <input
+          type="submit"
+          className={RegisterPageCSS.registerbutton}
+          value="Register"
+        />
       </form>
+
+      {isModalOpen && (
+        <div className={RegisterPageCSS.modal}>
+          <div className={RegisterPageCSS.modalContent}>
+            {registrationSuccess ? (
+              <>
+                <h3>Registration Successful</h3>
+                <p>Your registration was successful!</p>
+                <button onClick={closeModal}>Close</button>
+              </>
+            ) : (
+              <>
+                <h3>Registration Failed</h3>
+                <p>Sorry, registration failed. Please try again.</p>
+                <button onClick={closeModal}>Close</button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      <ToastContainer />
     </div>
   );
 }

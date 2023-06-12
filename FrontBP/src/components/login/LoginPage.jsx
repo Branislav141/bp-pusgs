@@ -1,12 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import { Link } from "react-router-dom";
+import LoginPageCSS from "./LoginPage.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { setToken } from "../../store/useTokenStore";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,8 +24,9 @@ export default function LoginPage() {
       setEmail("");
       setPassword("");
 
-      navigate("/dashboard");
-      // Perform any necessary actions after successful login, such as redirecting to a different page
+      setToken(token);
+
+      // set token to some kind of storage
     } catch (error) {
       // Handle error, such as displaying an error message to the user
       console.error("Login failed", error);
@@ -33,13 +34,13 @@ export default function LoginPage() {
   };
   return (
     <div>
-      <form onSubmit={handleLogin} className="Form">
+      <form onSubmit={handleLogin} className={LoginPageCSS.Form}>
         <br />
 
         <label>Email</label>
         <input
           type="email"
-          className="email"
+          className={LoginPageCSS.email}
           placeholder="enter your email"
           id="email"
           value={email}
@@ -48,7 +49,7 @@ export default function LoginPage() {
 
         <label>Password</label>
         <input
-          className="password"
+          className={LoginPageCSS.password}
           type="password"
           placeholder="enter your password"
           id="password"
@@ -56,20 +57,24 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
 
-        <input type="submit" className="loginbutton" value="Login" />
+        <input
+          type="submit"
+          className={LoginPageCSS.loginbutton}
+          value="Login"
+        />
         <hr></hr>
 
-        <div className="or">Or sign with:</div>
+        <div className={LoginPageCSS.or}>Or sign with:</div>
         <br />
         <div>
-          <button className="faceicon"></button>
+          <button className={LoginPageCSS.faceicon}></button>
         </div>
 
         <hr></hr>
 
         <div>
           <Link to="/register">
-            <button className="regButton">Regiser</button>
+            <button className={LoginPageCSS.regButton}>Regiser</button>
           </Link>
         </div>
       </form>

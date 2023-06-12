@@ -7,22 +7,22 @@
   padding: 10px 20px;
 }
 
-.nav-links {
+.navlinks {
   list-style: none;
   display: flex;
 }
 
-.nav-links li {
+.navlinks li {
   margin-right: 20px;
 }
 
-.nav-links li a {
+.navlinks li a {
   color: #fff;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
 }
 
-.nav-links li a:hover {
+.navlinks li a:hover {
   color: #cfcfcf;
 }

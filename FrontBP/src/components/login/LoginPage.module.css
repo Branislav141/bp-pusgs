@@ -1,6 +1,6 @@
-input[type="submit"] {
+.loginbutton {
   width: 100%;
-  background-color: #4caf50;
+  background-color: green;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -9,14 +9,19 @@ input[type="submit"] {
   cursor: pointer;
   font-size: 20px;
 }
-input[type="submit"]:hover {
+.loginbutton:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.regButton:hover {
   background-color: red;
   cursor: pointer;
 }
 
 .regButton {
   width: 100%;
-  background-color: blue;
+  background-color: green;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -38,9 +43,7 @@ input[type="submit"]:hover {
 }
 
 .email,
-.password,
-input[type="text"],
-input[type="date"] {
+.password {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -51,18 +54,12 @@ input[type="date"] {
   text-align: center;
 }
 
-button:hover {
+.button:hover {
   background-color: red;
   cursor: pointer;
 }
 
-button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-label {
+.label {
   font-size: 20px;
   font-style: italic;
   font-weight: bold;
@@ -71,7 +68,7 @@ label {
 .faceicon {
   width: 60px;
   height: 60px;
-  background-image: url("../photos/facebook.png");
+  background-image: url("../../photos/facebook.png");
   background-size: 100%;
   border-radius: 10px;
 }
