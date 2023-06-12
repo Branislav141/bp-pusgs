@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import RegisterPageCSS from "./RegisterPage.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 function RegisterPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
