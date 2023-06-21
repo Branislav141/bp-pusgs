@@ -16,6 +16,7 @@ namespace BackendBP.Areas.Identity.Data
         {
         }
 
+        public DbSet<BackendUser> BackendUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

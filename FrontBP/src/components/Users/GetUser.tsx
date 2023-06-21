@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { User } from "../../models/User";
 
-const GetUser = () => {
+interface GetUserProps {
+  userId: string; // Explicitly define the type of the `id` prop as string
+}
+
+const GetUser = ({ userId }: GetUserProps) => {
   const [user, setUser] = useState<User | null>(null);
-  const userId = "123"; // Replace with the actual user ID you want to fetch
 
   useEffect(() => {
     const fetchUser = async () => {

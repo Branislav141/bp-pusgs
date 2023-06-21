@@ -164,7 +164,6 @@ function RegisterPage() {
           value={formData.accountType}
           onChange={handleChange}
         >
-          <option value="">Select Account Type</option>
           <option value="administrator">Administrator</option>
           <option value="prodavac">Prodavac</option>
           <option value="kupac">Kupac</option>

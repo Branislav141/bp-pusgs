@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import NavbarUlogovaniCSS from "./NavbarUlogovani.module.css";
 import menuIcon from "../../photos/slikaAcc.png";
 import { removeToken } from "../../store/useTokenStore";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarUlogovani() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     setMenuOpen(!isMenuOpen);
@@ -14,6 +16,10 @@ export default function NavbarUlogovani() {
     // Add your logout functionality here
     removeToken();
     console.log("Logout clicked");
+  };
+
+  const handleEditData = () => {
+    navigate("/edit-profile"); // Navigate to the EditProfilePage
   };
 
   return (
@@ -35,7 +41,7 @@ export default function NavbarUlogovani() {
             <button onClick={handleLogout}>Logout</button>
           </li>
           <li>
-            <button>Edit data</button>
+            <button onClick={handleEditData}>Edit data</button>
           </li>
         </ul>
       )}

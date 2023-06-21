@@ -17,7 +17,7 @@ export const useTokenStore = create<TokenStoreState>()(
 );
 
 export const setToken = (token: string | null) =>
-  useTokenStore.setState(() => ({ token }));
+  useTokenStore.setState((state) => ({ token }));
 
 export const removeToken = () =>
-  useTokenStore.setState(() => ({ token: null }));
+  useTokenStore.setState((state) => ({ token: null }));

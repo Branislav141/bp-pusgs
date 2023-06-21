@@ -19,17 +19,7 @@ namespace BackendBP.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("BackendContextConnection")));
 
-                services.AddDefaultIdentity<BackendUser>(options =>
-                {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequiredLength = 5;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-
-
-                })
+                services.AddDefaultIdentity<BackendUser>()//options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<BackendContext>();
             });
         }
