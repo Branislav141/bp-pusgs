@@ -200,3 +200,6 @@ C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\EmailSender.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\EmailSender.pdb

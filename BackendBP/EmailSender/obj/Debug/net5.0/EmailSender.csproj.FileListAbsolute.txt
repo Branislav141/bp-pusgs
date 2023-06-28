@@ -1,0 +1,12 @@
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\bin\Debug\net5.0\EmailSender.deps.json
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\bin\Debug\net5.0\EmailSender.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\bin\Debug\net5.0\EmailSender.pdb
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.csproj.AssemblyReference.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.AssemblyInfoInputs.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.AssemblyInfo.cs
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.csproj.CoreCompileInputs.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\refint\EmailSender.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\EmailSender.pdb
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\EmailSender\obj\Debug\net5.0\ref\EmailSender.dll

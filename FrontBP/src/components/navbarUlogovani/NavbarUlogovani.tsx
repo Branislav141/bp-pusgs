@@ -19,7 +19,7 @@ export default function NavbarUlogovani() {
   };
 
   const handleEditData = () => {
-    navigate("/edit-profile"); // Navigate to the EditProfilePage
+    navigate("/dashboard/edit-profile"); // Navigate to the EditProfilePage
   };
 
   return (
