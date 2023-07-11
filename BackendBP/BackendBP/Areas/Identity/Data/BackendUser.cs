@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BackendBP.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace BackendBP.Areas.Identity.Data
@@ -17,5 +18,7 @@ namespace BackendBP.Areas.Identity.Data
         public string Address { get; set; }
         public string AccountType { get; set; }
         public string AccountStatus { get; set; }
+
+        public Photo PhotoUser { get; set; }
     }
 }

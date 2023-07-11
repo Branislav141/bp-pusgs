@@ -12,5 +12,6 @@ namespace BackendBP.Dtos
         public DateTime Birthday { get; set; }
         public string Address { get; set; }
         public string AccountType { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

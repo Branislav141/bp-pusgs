@@ -35,11 +35,9 @@ namespace BackendBP.Areas.Identity
                 }).AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<BackendContext>();
 
-                services.ConfigureApplicationCookie(options =>
-                {
-                    options.Cookie.HttpOnly = true;
-                    
-                });
+               
+
+
 
                 services.AddSingleton<IEmailSender, EmailSenderr>();
             });

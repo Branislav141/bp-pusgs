@@ -1,5 +1,6 @@
 ﻿using BackendBP.Areas.Identity.Data;
 using BackendBP.Dtos;
+using BackendBP.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,10 +28,10 @@ namespace BackendBP.Controllers
         public async Task<IActionResult> GetUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userName = User.Identity.Name; // If you have set the username claim
 
-            // Fetch the user data based on the userId or userName from the database
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userManager.Users
+                .Include(u => u.PhotoUser)
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
                 return NotFound();
@@ -39,15 +40,15 @@ namespace BackendBP.Controllers
             {
                 Name = user.Name,
                 Email = user.Email,
-                UserName= user.UserName,
-                Address=user.Address,
-                Surname=user.Surname,
-                Birthday=user.Birthday,
-                // Set other user properties
+                PhotoUser = user.PhotoUser,
             };
+
+           
 
             return Ok(userModel);
         }
+
+
 
 
         [HttpPost("user/update")]

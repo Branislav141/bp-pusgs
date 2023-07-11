@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 import RegisterPageCSS from "./RegisterPage.module.css";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+interface RegistrationModel {
+  username: string;
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
+  dateOfBirth: string;
+  address: string;
+  accountType: string;
+  photoUrl: string | null;
+}
 
 function RegisterPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegistrationModel>({
     username: "",
     email: "",
     password: "",
@@ -14,9 +27,8 @@ function RegisterPage() {
     dateOfBirth: "",
     address: "",
     accountType: "",
+    photoUrl: null,
   });
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files.length > 0) {
@@ -36,14 +48,24 @@ function RegisterPage() {
       formData.append("file", selectedFile);
 
       try {
-        // Replace the URL with your file upload endpoint
         const response = await axios.post(
-          "YOUR_FILE_UPLOAD_ENDPOINT",
-          formData
+          "http://localhost:5000/api/Auth/uploadPhoto",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
-        console.log("File uploaded:", response.data);
+
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          photoUrl: response.data.photoUrl,
+        }));
+        toast.success("Photo uploaded successfully!");
       } catch (error) {
         console.error("Error uploading file:", error);
+        toast.error("Error uploading photo. Please try again.");
       }
     }
   }
@@ -52,28 +74,38 @@ function RegisterPage() {
     event.preventDefault();
 
     try {
-      // Replace the URL with your registration endpoint
       const response = await axios.post(
         "http://localhost:5000/api/Auth/register",
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      console.log("Registration successful:", response.data);
 
-      setRegistrationSuccess(true);
-      // You can perform additional actions after successful registration
+      console.log("Registration successful:", response.data);
+      toast.success("Registration successful!");
+      // Perform any additional actions after successful registration
+
+      // Reset the form data
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        name: "",
+        surname: "",
+        dateOfBirth: "",
+        address: "",
+        accountType: "",
+        photoUrl: null,
+      });
     } catch (error) {
       console.error("Registration error:", error);
-      setRegistrationSuccess(false);
+      toast.error("Registration failed. Please try again.");
       // Handle registration error
-    } finally {
-      setModalOpen(true);
     }
   }
-
-  function closeModal() {
-    setModalOpen(false);
-  }
-
   return (
     <div>
       <form className={RegisterPageCSS.RegisterForm} onSubmit={handleSubmit}>
@@ -183,26 +215,6 @@ function RegisterPage() {
           value="Register"
         />
       </form>
-
-      {isModalOpen && (
-        <div className={RegisterPageCSS.modal}>
-          <div className={RegisterPageCSS.modalContent}>
-            {registrationSuccess ? (
-              <>
-                <h3>Registration Successful</h3>
-                <p>Your registration was successful!</p>
-                <button onClick={closeModal}>Close</button>
-              </>
-            ) : (
-              <>
-                <h3>Registration Failed</h3>
-                <p>Sorry, registration failed. Please try again.</p>
-                <button onClick={closeModal}>Close</button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
 
       <ToastContainer />
     </div>

@@ -12,6 +12,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using BackendBP.Models;
+using System.IO;
+
 
 namespace BackendBP.Controllers
 {
@@ -23,6 +27,8 @@ namespace BackendBP.Controllers
         private readonly UserManager<BackendUser> _userManager;
         private readonly SignInManager<BackendUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+       
+      
 
         public AuthController(BackendContext dbContext, UserManager<BackendUser> userManager, SignInManager<BackendUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
@@ -30,6 +36,7 @@ namespace BackendBP.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+           
         }
 
         [HttpPost("login")]
@@ -99,6 +106,11 @@ namespace BackendBP.Controllers
                 AccountStatus = "Pending"
             };
 
+            if (!string.IsNullOrEmpty(registrationModel.PhotoUrl))
+            {
+                backendUser.PhotoUser = new Photo { Url = registrationModel.PhotoUrl, IsDeleted = false };
+            }
+
             var result = await _userManager.CreateAsync(backendUser, registrationModel.Password);
 
             if (result.Succeeded)
@@ -109,18 +121,52 @@ namespace BackendBP.Controllers
                     await _roleManager.CreateAsync(new IdentityRole(backendUser.AccountType));
                 }
 
-                return Ok(new { Result = "Register Succeeded" });
+                return Ok(new { Result = "Registration succeeded" });
             }
             else
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (var error in result.Errors)
-                {
-                    sb.Append(error.Description);
-                }
-
-                return BadRequest(new { Result = $"Register Failed: {sb}" });
+                var errors = result.Errors.Select(error => error.Description);
+                return BadRequest(new { Result = "Registration failed", Errors = errors });
             }
         }
+        [HttpPost("uploadPhoto")]
+        public async Task<IActionResult> UploadPhoto(IFormFile file)
+        {
+            // Check if a file is uploaded
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file selected");
+            }
+
+            try
+            {
+                // Generate a unique file name
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+                // Determine the path where you want to save the image on the server
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Images", fileName);
+
+                // Save the image to the specified path
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Generate the URL of the uploaded photo
+                string photoUrl = $"{Request.Scheme}://{Request.Host}/Resources/Images/{fileName}";
+
+                return Ok(new { photoUrl });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+
+
+
+
+
+
     }
 }

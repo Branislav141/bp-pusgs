@@ -1,0 +1,30 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.user-info p {
+  margin: 0;
+}
+
+.user-photo {
+  margin-top: 20px;
+}
+
+.user-photo img {
+  max-width: 200px;
+  border-radius: 5px;
+}
