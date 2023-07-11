@@ -28,7 +28,6 @@ const Dashboard = () => {
 
     fetchUserData();
   }, [token]);
-  console.log(user?.photoUser?.url);
 
   return (
     <div className={DashboardCSS.container}>
@@ -37,6 +36,10 @@ const Dashboard = () => {
         <div className={DashboardCSS["user-info"]}>
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
+          <p>Username: {user.username}</p>
+          <p>Surname: {user.surname}</p>
+          <p>Birthday: {user.birthday}</p>
+          <p>Adress: {user.address}</p>
           {user.photoUser ? (
             <div className={DashboardCSS["user-photo"]}>
               <img src={user.photoUser.url} alt="User" />

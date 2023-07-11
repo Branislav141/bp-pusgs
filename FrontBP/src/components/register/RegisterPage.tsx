@@ -26,7 +26,7 @@ function RegisterPage() {
     surname: "",
     dateOfBirth: "",
     address: "",
-    accountType: "",
+    accountType: "prodavac",
     photoUrl: null,
   });
 
@@ -39,7 +39,15 @@ function RegisterPage() {
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+
+    if (name === "accountType" && value === "kupac") {
+      // Set accountType to "kupac"
+      setFormData({ ...formData, accountType: "kupac" });
+    } else {
+      // Update other fields as usual
+      setFormData({ ...formData, [name]: value });
+    }
   }
 
   async function handleUpload() {
@@ -97,7 +105,7 @@ function RegisterPage() {
         surname: "",
         dateOfBirth: "",
         address: "",
-        accountType: "",
+        accountType: "prodavac",
         photoUrl: null,
       });
     } catch (error) {
@@ -106,6 +114,7 @@ function RegisterPage() {
       // Handle registration error
     }
   }
+
   return (
     <div>
       <form className={RegisterPageCSS.RegisterForm} onSubmit={handleSubmit}>
@@ -196,7 +205,6 @@ function RegisterPage() {
           value={formData.accountType}
           onChange={handleChange}
         >
-          <option value="administrator">Administrator</option>
           <option value="prodavac">Prodavac</option>
           <option value="kupac">Kupac</option>
         </select>

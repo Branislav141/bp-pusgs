@@ -51,6 +51,8 @@ namespace BackendBP.Controllers
 
                 if (signInResult.Succeeded)
                 {
+
+                  
                     // Generate a JWT token for the authenticated user
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes("MY_BIG_SECRET_KEY_GHJDKGDSNGNDSNJKGNJDS");

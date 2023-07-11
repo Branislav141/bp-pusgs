@@ -40,6 +40,10 @@ namespace BackendBP.Controllers
             {
                 Name = user.Name,
                 Email = user.Email,
+                UserName = user.UserName,
+                Birthday = user.Birthday,
+                Address = user.Address,
+                Surname = user.Surname,
                 PhotoUser = user.PhotoUser,
             };
 
@@ -50,8 +54,9 @@ namespace BackendBP.Controllers
 
 
 
-
+        
         [HttpPost("user/update")]
+        
         public async Task<IActionResult> UpdateUser([FromBody] EditProfileModel model)
         {
             if (!ModelState.IsValid)

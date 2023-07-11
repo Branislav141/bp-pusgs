@@ -12,13 +12,6 @@ const EditProfileForm = () => {
   const token = useTokenStore((state) => state.token);
 
   useEffect(() => {
-    const formatDate = (dateString: string) => {
-      const date = new Date(dateString);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
-    };
     // Fetch user data and populate form fields
     const fetchUserData = async () => {
       try {
@@ -31,12 +24,15 @@ const EditProfileForm = () => {
           }
         );
         const userData = response.data;
-        setUserName(userData.userName);
-        setEmail(userData.email);
-        setName(userData.name);
-        setSurname(userData.surname);
-        setBirthday(formatDate(userData.birthday));
-        setAddress(userData.address);
+        setUserName(userData.userName || "");
+        setEmail(userData.email || "");
+        setName(userData.name || "");
+        setSurname(userData.surname || "");
+        const formattedBirthday = userData.birthday
+          ? userData.birthday.split("T")[0]
+          : "";
+        setBirthday(formattedBirthday);
+        setAddress(userData.address || "");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -54,7 +50,7 @@ const EditProfileForm = () => {
       email,
       name,
       surname,
-      birthday,
+      birthday: new Date(birthday),
       address,
     };
 
@@ -76,7 +72,6 @@ const EditProfileForm = () => {
         // Display an error message to the user
       });
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
