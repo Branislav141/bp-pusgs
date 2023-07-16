@@ -32,8 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailSender.csproj": {
-                "projectPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailSender.csproj"
+              "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj": {
+                "projectPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj"
               }
             }
           }
@@ -106,12 +106,12 @@
         }
       }
     },
-    "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailSender.csproj": {
+    "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailSender.csproj",
-        "projectName": "EmailSender",
-        "projectPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailSender.csproj",
+        "projectUniqueName": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj",
+        "projectName": "EmailService",
+        "projectPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj",
         "packagesPath": "C:\\Users\\BP Doktor\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\obj\\",
         "projectStyle": "PackageReference",
@@ -149,6 +149,10 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.0.3, )"
             }
           },
           "imports": [

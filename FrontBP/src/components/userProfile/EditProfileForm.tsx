@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useTokenStore } from "../../store/useTokenStore";
+import styles from "./EditProfileForm.module.css";
+import { useNavigate } from "react-router-dom";
 
-const EditProfileForm = () => {
+const EditProfileForm: React.FC = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -10,9 +12,9 @@ const EditProfileForm = () => {
   const [birthday, setBirthday] = useState("");
   const [address, setAddress] = useState("");
   const token = useTokenStore((state) => state.token);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user data and populate form fields
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
@@ -44,7 +46,6 @@ const EditProfileForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Create an object with the updated profile data
     const updatedProfile = {
       userName,
       email,
@@ -54,7 +55,6 @@ const EditProfileForm = () => {
       address,
     };
 
-    // Make a request to update the profile
     axios
       .post("http://localhost:5000/api/Users/user/update", updatedProfile, {
         headers: {
@@ -62,18 +62,17 @@ const EditProfileForm = () => {
         },
       })
       .then((response) => {
-        // Handle success
         console.log("Profile updated successfully");
-        // You can redirect the user to the profile page or display a success message
+        navigate("/dashboard");
       })
       .catch((error) => {
-        // Handle error
         console.error("Failed to update profile", error);
-        // Display an error message to the user
       });
   };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={handleSubmit}>
+      <h1>Edit user data</h1>
       <div>
         <label htmlFor="userName">Username:</label>
         <input
@@ -82,6 +81,7 @@ const EditProfileForm = () => {
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
           required
+          className={styles.input}
         />
       </div>
       <div>
@@ -92,6 +92,7 @@ const EditProfileForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className={styles.input}
         />
       </div>
       <div>
@@ -102,6 +103,7 @@ const EditProfileForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          className={styles.input}
         />
       </div>
       <div>
@@ -112,6 +114,7 @@ const EditProfileForm = () => {
           value={surname}
           onChange={(e) => setSurname(e.target.value)}
           required
+          className={styles.input}
         />
       </div>
       <div>
@@ -122,6 +125,7 @@ const EditProfileForm = () => {
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
           required
+          className={styles.input}
         />
       </div>
       <div>
@@ -132,9 +136,12 @@ const EditProfileForm = () => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           required
+          className={styles.input}
         />
       </div>
-      <button type="submit">Save</button>
+      <button type="submit" className={styles.button}>
+        Save
+      </button>
     </form>
   );
 };

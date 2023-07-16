@@ -1,6 +1,5 @@
 ﻿using System;
 using BackendBP.Areas.Identity.Data;
-using EmailSender;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -39,7 +38,7 @@ namespace BackendBP.Areas.Identity
 
 
 
-                services.AddSingleton<IEmailSender, EmailSenderr>();
+               
             });
         }
     }

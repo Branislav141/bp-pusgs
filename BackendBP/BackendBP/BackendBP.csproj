@@ -18,12 +18,16 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EmailSender\EmailSender.csproj" />
-  </ItemGroup>
+  
 
   <ItemGroup>
     <Folder Include="Resources\Images\" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmailSender\EmailService.csproj" />
   </ItemGroup>
 
 </Project>

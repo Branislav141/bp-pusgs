@@ -20,20 +20,16 @@ export default function LoginPage() {
         "http://localhost:5000/api/Auth/login",
         { email, password }
       );
-      // Assuming the server returns a token upon successful login
-      const token = response.data.token;
-      // Store the token in local storage or any other preferred method for authentication
 
-      // Reset the form fields
+      const token = response.data.token;
+
       setEmail("");
       setPassword("");
 
       setToken(token);
       window.alert("Login successful!");
       setLoginSucces(true);
-      // set token to some kind of storage
     } catch (error) {
-      // Handle error, such as displaying an error message to the user
       console.error("Login failed", error);
       setLoginSucces(false);
     } finally {

@@ -2,6 +2,7 @@
 using Backend.Helpers;
 using BackendBP.Areas.Identity.Data;
 using BackendBP.Data;
+using EmailService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,9 +73,12 @@ namespace BackendBP
               });
 
 
+            var emailConfig = Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
             services.AddTransient<IImageHandler, ImageHandler>();
             services.AddTransient<IImageWriter, ImageWriter>();
 
+            services.AddScoped<IEmailSender, EmailSender>();
 
 
 
@@ -92,13 +96,14 @@ namespace BackendBP
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseStaticFiles(new StaticFileOptions()
             {
@@ -106,11 +111,7 @@ namespace BackendBP
                 RequestPath = "/Resources/Images"
             });
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+         
 
             app.UseEndpoints(endpoints =>
             {

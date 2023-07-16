@@ -6,6 +6,7 @@ import RegisterPage from "../components/register/RegisterPage";
 import Dashboard from "../components/dashboard/Dashboard";
 import NotLoggedInGuard from "../components/guards/NotLoggedInGuard";
 import EditProfileForm from "../components/userProfile/EditProfileForm";
+import UserList from "../components/Users/UserList";
 export default function Pages() {
   return (
     <>
@@ -19,6 +20,7 @@ export default function Pages() {
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/edit-profile" element={<EditProfileForm />} />
+          <Route path="/dashboard/userList" element={<UserList />} />
         </Route>
       </Routes>
     </>

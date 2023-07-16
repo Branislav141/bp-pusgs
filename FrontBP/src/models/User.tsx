@@ -1,11 +1,13 @@
 export interface User {
-  username: string;
+  id: string;
+  userName: string;
   email: string;
   name: string;
   surname: string;
   birthday: string;
   address: string;
   accountType: string;
+  accountStatus: string;
   photoUser: Photo | null;
 }
 

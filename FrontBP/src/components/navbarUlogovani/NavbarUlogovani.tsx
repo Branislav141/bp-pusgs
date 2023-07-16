@@ -13,13 +13,12 @@ export default function NavbarUlogovani() {
   };
 
   const handleLogout = () => {
-    // Add your logout functionality here
     removeToken();
     console.log("Logout clicked");
   };
 
   const handleEditData = () => {
-    navigate("/dashboard/edit-profile"); // Navigate to the EditProfilePage
+    navigate("/dashboard/edit-profile");
   };
 
   return (

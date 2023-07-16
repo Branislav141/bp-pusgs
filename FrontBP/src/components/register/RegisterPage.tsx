@@ -42,10 +42,8 @@ function RegisterPage() {
     const { name, value } = event.target;
 
     if (name === "accountType" && value === "kupac") {
-      // Set accountType to "kupac"
       setFormData({ ...formData, accountType: "kupac" });
     } else {
-      // Update other fields as usual
       setFormData({ ...formData, [name]: value });
     }
   }
@@ -94,9 +92,7 @@ function RegisterPage() {
 
       console.log("Registration successful:", response.data);
       toast.success("Registration successful!");
-      // Perform any additional actions after successful registration
 
-      // Reset the form data
       setFormData({
         username: "",
         email: "",
@@ -111,7 +107,6 @@ function RegisterPage() {
     } catch (error) {
       console.error("Registration error:", error);
       toast.error("Registration failed. Please try again.");
-      // Handle registration error
     }
   }
 

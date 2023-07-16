@@ -3,7 +3,7 @@ import axios from "axios";
 import { User } from "../../models/User";
 
 interface GetUserProps {
-  userId: string; // Explicitly define the type of the `id` prop as string
+  userId: string;
 }
 
 const GetUser = ({ userId }: GetUserProps) => {
