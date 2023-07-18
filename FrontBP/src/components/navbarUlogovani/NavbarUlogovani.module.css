@@ -1,3 +1,4 @@
+/* NavbarUlogovani.module.css */
 .navbarU {
   display: flex;
   justify-content: flex-end;
@@ -6,6 +7,17 @@
   color: #fff;
   padding: 10px 20px;
   position: relative;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Push the buttons to the right */
+}
+
+.logo {
+  max-height: 70px;
+  margin-right: 10px;
 }
 
 .menuO {
@@ -36,6 +48,6 @@
 }
 
 .menuIc {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 }

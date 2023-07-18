@@ -3,7 +3,7 @@ import NavbarUlogovaniCSS from "./NavbarUlogovani.module.css";
 import menuIcon from "../../photos/slikaAcc.png";
 import { removeToken } from "../../store/useTokenStore";
 import { useNavigate } from "react-router-dom";
-
+import logo from "../../photos/bplogo.jpg";
 export default function NavbarUlogovani() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -23,6 +23,9 @@ export default function NavbarUlogovani() {
 
   return (
     <nav className={NavbarUlogovaniCSS.navbarU}>
+      <div className={NavbarUlogovaniCSS.logoContainer}>
+        <img src={logo} alt="Logo" className={NavbarUlogovaniCSS.logo} />
+      </div>
       <button
         className={NavbarUlogovaniCSS.menuButton}
         onClick={handleButtonClick}
