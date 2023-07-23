@@ -41,15 +41,15 @@ const Dashboard: React.FC = () => {
     navigate("/dashboard/addArticle");
   };
 
-  const goToOldOrders = () => {
-    navigate("/dashboard/oldOrders");
+  const goToMyArticles = () => {
+    navigate("/dashboard/myArticles");
   };
 
   return (
     <div className={DashboardCSS.container}>
       {user ? (
         <div className={DashboardCSS["user-info"]}>
-          <h1>User info</h1>
+          <h1>{user.name} info</h1>
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
           <p>Username: {user.userName}</p>
@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
               </button>
               <button
                 className={DashboardCSS["prodavac-button"]}
-                onClick={goToOldOrders}
+                onClick={goToMyArticles}
               >
                 My Articles
               </button>

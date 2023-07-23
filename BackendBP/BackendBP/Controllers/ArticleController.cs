@@ -18,6 +18,7 @@ namespace BackendBP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ArticleController : Controller
     {
 
@@ -42,7 +43,7 @@ namespace BackendBP.Controllers
 
 
         [HttpPost("AddArticle")]
-        [Authorize] 
+        
         public IActionResult AddArticle([FromBody] ArticlesToAdd artToAdd)
         {
             string userName = User.Identity.Name;
@@ -71,6 +72,40 @@ namespace BackendBP.Controllers
             return Ok("Add article succeeded");
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetArticle(int id)
+        {
+            var article = await _dbContext.Articles.FindAsync(id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(article);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditArticle(int id, [FromBody] Article editedArticle)
+        {
+            var article = await _dbContext.Articles.FindAsync(id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            // Update properties of the article with edited values
+            article.Name = editedArticle.Name;
+            article.Price = editedArticle.Price;
+            article.Quantity = editedArticle.Quantity;
+            article.Description = editedArticle.Description;
+
+            // Save changes to the database
+            await _dbContext.SaveChangesAsync();
+
+            return Ok(article);
+        }
 
 
 

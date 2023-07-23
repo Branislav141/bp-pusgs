@@ -10,6 +10,7 @@ import UserList from "../components/Users/UserList";
 import AddArticle from "../components/Article/AddArticle";
 import GetArticles from "../components/Article/GetArticles";
 import { useState, useEffect } from "react";
+import EditArticle from "../components/Article/EditArticle";
 
 export default function Pages() {
   const [userEmail, setUserEmail] = useState<string>(() => {
@@ -39,8 +40,12 @@ export default function Pages() {
           <Route path="/dashboard/userList" element={<UserList />} />
           <Route path="/dashboard/addArticle" element={<AddArticle />} />
           <Route
-            path="/dashboard/oldOrders"
+            path="/dashboard/myArticles"
             element={<GetArticles userEmail={userEmail} />}
+          />
+          <Route
+            path="/dashboard/myArticles/editArticle/:articleId"
+            element={<EditArticle />}
           />
         </Route>
       </Routes>

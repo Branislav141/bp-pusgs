@@ -3,10 +3,12 @@ import axios from "axios";
 import { Article } from "../../models/Article";
 import { useTokenStore } from "../../store/useTokenStore";
 import GetArticlesCSS from "../Article/GetArticles.module.css";
+import { useNavigate } from "react-router-dom";
 
 const UserArticles = ({ userEmail }: { userEmail: string }) => {
   const [userArticles, setUserArticles] = useState<Article[] | null>(null);
   const token = useTokenStore((state) => state.token);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userEmail) {
@@ -38,9 +40,17 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
     return <div>Loading...</div>;
   }
 
+  const handleEditArticle = (articleId: number) => {
+    navigate(`/dashboard/myArticles/editArticle/${articleId}`);
+  };
+
+  const goBack = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
   return (
     <div className={GetArticlesCSS.container}>
-      <h2>User's Articles</h2>
+      <h2> Articles</h2>
       <table className={GetArticlesCSS.table}>
         <thead>
           <tr>
@@ -59,12 +69,18 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
               <td>{article.quantity}</td>
               <td>{article.description}</td>
               <td>
-                <button>Edit</button>
+                <button onClick={() => handleEditArticle(article.id)}>
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <br />
+      <button className={GetArticlesCSS["back-button"]} onClick={goBack}>
+        Back
+      </button>
     </div>
   );
 };

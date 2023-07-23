@@ -24,8 +24,27 @@
   border: none;
   padding: 8px 12px;
   cursor: pointer;
+  border-radius: 20px;
 }
 
 .table button:hover {
   background-color: #45a049;
+}
+
+.back-button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+.back-button:hover {
+  background-color: darkgreen;
+}
+
+.back-button:active {
+  background-color: forestgreen;
 }

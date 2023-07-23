@@ -12,7 +12,7 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  margin-right: auto; /* Push the buttons to the right */
+  margin-right: auto;
 }
 
 .logo {
