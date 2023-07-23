@@ -59,6 +59,9 @@ namespace BackendBP.Migrations.Data
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("APhotoId");

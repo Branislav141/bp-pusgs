@@ -131,6 +131,7 @@ namespace BackendBP.Controllers
                 return BadRequest(new { Result = "Registration failed", Errors = errors });
             }
         }
+
         [HttpPost("uploadPhoto")]
         public async Task<IActionResult> UploadPhoto(IFormFile file)
         {

@@ -12,6 +12,7 @@ namespace BackendBP.Models
         public int Quantity { get; set; }
         public string Description { get; set; }
         public ArticalPhoto APhoto { get; set; }
-        
+        public string UserCreated { get; set; }
+
     }
 }

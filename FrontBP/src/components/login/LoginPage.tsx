@@ -3,16 +3,18 @@ import LoginPageCSS from "./LoginPage.module.css";
 import { useState } from "react";
 import axios from "axios";
 import { setToken } from "../../store/useTokenStore";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function LoginPage() {
+const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
+  onLogin,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isModalOpen, setModalOpen] = useState(false);
-  const [loginSuccess, setLoginSucces] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -27,11 +29,17 @@ export default function LoginPage() {
       setPassword("");
 
       setToken(token);
-      window.alert("Login successful!");
-      setLoginSucces(true);
+
+      // Call onLogin with the user's email when login is successful
+      onLogin(email);
+
+      // Show success toast message
+      toast.success("Login successful!");
     } catch (error) {
       console.error("Login failed", error);
-      setLoginSucces(false);
+
+      // Show error toast message
+      toast.error("Login failed. Please try again.");
     } finally {
       setModalOpen(true);
     }
@@ -40,6 +48,7 @@ export default function LoginPage() {
   function closeModal() {
     setModalOpen(false);
   }
+
   return (
     <div>
       <form onSubmit={handleLogin} className={LoginPageCSS.Form}>
@@ -82,7 +91,7 @@ export default function LoginPage() {
 
         <div>
           <Link to="/register">
-            <button className={LoginPageCSS.regButton}>Regiser</button>
+            <button className={LoginPageCSS.regButton}>Register</button>
           </Link>
         </div>
       </form>
@@ -106,4 +115,6 @@ export default function LoginPage() {
       <ToastContainer />
     </div>
   );
-}
+};
+
+export default LoginPage;

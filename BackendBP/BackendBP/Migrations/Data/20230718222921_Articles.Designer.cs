@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendBP.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230717105221_Articles")]
+    [Migration("20230718222921_Articles")]
     partial class Articles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,9 @@ namespace BackendBP.Migrations.Data
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserCreated")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -7,13 +7,22 @@ import Dashboard from "../components/dashboard/Dashboard";
 import NotLoggedInGuard from "../components/guards/NotLoggedInGuard";
 import EditProfileForm from "../components/userProfile/EditProfileForm";
 import UserList from "../components/Users/UserList";
+import AddArticle from "../components/Article/AddArticle";
+import GetArticles from "../components/Article/GetArticles";
+import { useState } from "react";
 export default function Pages() {
+  const [userEmail, setUserEmail] = useState<string>(""); // State za userEmail
+
+  // Funkcija za postavljanje userEmail-a, na primer kada se korisnik prijavi
+  const handleLogin = (email: string) => {
+    setUserEmail(email);
+  };
   return (
     <>
       <Routes>
         <Route element={<NotLoggedInGuard />}>
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         </Route>
 
         <Route element={<LoggedInGuard />}>
@@ -21,6 +30,11 @@ export default function Pages() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/edit-profile" element={<EditProfileForm />} />
           <Route path="/dashboard/userList" element={<UserList />} />
+          <Route path="/dashboard/addArticle" element={<AddArticle />} />
+          <Route
+            path="/dashboard/oldOrders"
+            element={<GetArticles userEmail={userEmail} />}
+          />
         </Route>
       </Routes>
     </>

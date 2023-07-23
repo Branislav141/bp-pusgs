@@ -5,7 +5,7 @@ import { useTokenStore } from "../../store/useTokenStore";
 import DashboardCSS from "./Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const token = useTokenStore((state) => state.token);
   const navigate = useNavigate();
@@ -36,6 +36,14 @@ const Dashboard = () => {
   };
 
   const isAdmin = user?.accountType === "administrator";
+  const isProdavac = user?.accountType === "prodavac";
+  const goToAddArticle = () => {
+    navigate("/dashboard/addArticle");
+  };
+
+  const goToOldOrders = () => {
+    navigate("/dashboard/oldOrders");
+  };
 
   return (
     <div className={DashboardCSS.container}>
@@ -47,7 +55,7 @@ const Dashboard = () => {
           <p>Username: {user.userName}</p>
           <p>Surname: {user.surname}</p>
           <p>Birthday: {user.birthday}</p>
-          <p>Adress: {user.address}</p>
+          <p>Address: {user.address}</p>
           {user.photoUser ? (
             <div className={DashboardCSS["user-photo"]}>
               <img src={user.photoUser.url} alt="User" />
@@ -62,6 +70,22 @@ const Dashboard = () => {
             >
               User List
             </button>
+          )}
+          {isProdavac && (
+            <>
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={goToAddArticle}
+              >
+                Add Article
+              </button>
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={goToOldOrders}
+              >
+                My Articles
+              </button>
+            </>
           )}
         </div>
       ) : (

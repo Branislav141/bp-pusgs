@@ -1,3 +1,4 @@
+/* Dashboard.module.css */
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -21,24 +22,34 @@
   margin: 0;
 }
 
-.user-photo {
-  margin-top: 20px;
-}
-
 .user-photo img {
   max-width: 200px;
-  border-radius: 5px;
+  max-height: 200px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
-.admin-button {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+.user-info {
+  text-align: center;
+}
+
+.admin-button,
+.prodavac-button {
+  display: inline-block;
   background-color: #007bff;
   color: #fff;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 20px;
   cursor: pointer;
+  margin: 5px;
+}
+
+.prodavac-button {
+  background-color: #28a745;
+}
+
+.admin-button:hover,
+.prodavac-button:hover {
+  background-color: #0056b3;
 }
