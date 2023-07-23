@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
     };
 
     fetchUserData();
-  }, [token]);
+  }, []);
 
   const goToUserList = () => {
     navigate("/dashboard/userList");

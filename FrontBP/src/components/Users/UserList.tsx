@@ -44,14 +44,11 @@ function UserList() {
         }
       );
       console.log("User approved:", response.data);
+      getUsers();
     } catch (error) {
       console.error("Error:", error);
     }
   }
-
-  useEffect(() => {
-    getUsers();
-  }, [users]);
 
   async function declineUser(email: string) {
     try {
@@ -65,7 +62,6 @@ function UserList() {
         }
       );
       console.log("User declined:", response.data);
-
       getUsers();
     } catch (error) {
       console.error("Error:", error);

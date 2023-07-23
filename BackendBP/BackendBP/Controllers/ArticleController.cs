@@ -35,9 +35,9 @@ namespace BackendBP.Controllers
         [HttpGet("my/{email}")]
         public IActionResult GetAllArticles(string email)
         {
-            List<Article> elementMre = _dbContext.Articles.Where(x => x.UserCreated == email).ToList();
+            List<Article> artikal = _dbContext.Articles.Where(x => x.UserCreated == email).ToList();
 
-            return Ok(elementMre);
+            return Ok(artikal);
         }
 
 

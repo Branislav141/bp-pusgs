@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Article } from "../../models/Article";
 import { useTokenStore } from "../../store/useTokenStore";
+import GetArticlesCSS from "../Article/GetArticles.module.css";
 
 const UserArticles = ({ userEmail }: { userEmail: string }) => {
   const [userArticles, setUserArticles] = useState<Article[] | null>(null);
   const token = useTokenStore((state) => state.token);
 
   useEffect(() => {
-    fetchUserArticles();
+    if (userEmail) {
+      fetchUserArticles();
+    }
   }, [userEmail]);
 
   const fetchUserArticles = async () => {
@@ -27,27 +30,41 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
     }
   };
 
+  if (!userEmail) {
+    return <div>No user email provided.</div>;
+  }
+
   if (userArticles === null) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
+    <div className={GetArticlesCSS.container}>
       <h2>User's Articles</h2>
-      <ul>
-        {userArticles ? (
-          userArticles.map((article) => (
-            <li key={article.id}>
-              <h3>{article.name}</h3>
-              <p>Price: {article.price}</p>
-              <p>Quantity: {article.quantity}</p>
-              <p>Description: {article.description}</p>
-            </li>
-          ))
-        ) : (
-          <div>Loading...</div>
-        )}
-      </ul>
+      <table className={GetArticlesCSS.table}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userArticles.map((article) => (
+            <tr key={article.id}>
+              <td>{article.name}</td>
+              <td>{article.price}</td>
+              <td>{article.quantity}</td>
+              <td>{article.description}</td>
+              <td>
+                <button>Edit</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

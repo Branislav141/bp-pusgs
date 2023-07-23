@@ -9,14 +9,21 @@ import EditProfileForm from "../components/userProfile/EditProfileForm";
 import UserList from "../components/Users/UserList";
 import AddArticle from "../components/Article/AddArticle";
 import GetArticles from "../components/Article/GetArticles";
-import { useState } from "react";
-export default function Pages() {
-  const [userEmail, setUserEmail] = useState<string>(""); // State za userEmail
+import { useState, useEffect } from "react";
 
-  // Funkcija za postavljanje userEmail-a, na primer kada se korisnik prijavi
+export default function Pages() {
+  const [userEmail, setUserEmail] = useState<string>(() => {
+    return localStorage.getItem("userEmail") || "";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("userEmail", userEmail);
+  }, [userEmail]);
+
   const handleLogin = (email: string) => {
     setUserEmail(email);
   };
+
   return (
     <>
       <Routes>
