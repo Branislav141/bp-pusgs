@@ -4,7 +4,7 @@ export interface Article {
   price: string;
   quantity: string;
   description: string;
-  photoArticle: ArticlePhoto | null;
+  aPhoto: ArticlePhoto | null;
 }
 
 export interface ArticlePhoto {

@@ -1,9 +1,12 @@
 .container {
   max-width: 500px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #4caf50;
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {
@@ -18,15 +21,18 @@ form {
 
 form div {
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 label {
   font-weight: bold;
+  margin-right: 10px;
 }
 
 input,
 textarea {
-  width: 100%;
+  flex: 1;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -37,7 +43,7 @@ textarea {
   min-height: 100px;
 }
 
-button {
+.back-button {
   background-color: #4caf50;
   color: #fff;
   padding: 10px 20px;
@@ -46,10 +52,22 @@ button {
   cursor: pointer;
 }
 
-button[type="submit"] {
+.back-button[type="submit"] {
   margin-top: 20px;
 }
 
 .back-button {
   background-color: #ccc;
+}
+
+.imageContainer {
+  max-width: 120px;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
 }

@@ -9,6 +9,7 @@ const EditArticle: React.FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
 
   const [article, setArticle] = useState<Article | null>(null);
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const token = useTokenStore((state) => state.token);
 
   const navigate = useNavigate();
@@ -42,15 +43,30 @@ const EditArticle: React.FC = () => {
     }));
   };
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    setNewImageFile(file);
+  };
+
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("name", article?.name || "");
+      formData.append("price", String(article?.price || 0));
+      formData.append("quantity", String(article?.quantity || 0));
+      formData.append("description", article?.description || "");
+      if (newImageFile) {
+        formData.append("imageFile", newImageFile);
+      }
+
       await axios.put(
         `http://localhost:5000/api/Article/${articleId}`,
-        article,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -103,6 +119,20 @@ const EditArticle: React.FC = () => {
             value={article.description}
             onChange={handleInputChange}
           />
+        </div>
+        <div>
+          <label>Current Image:</label>
+          {article.aPhoto ? (
+            <div className={EditArticleCSS.imageContainer}>
+              <img src={article.aPhoto.url} alt={article.name} />
+            </div>
+          ) : (
+            <p>No photo available</p>
+          )}
+        </div>
+        <div>
+          <label>Upload New Image:</label>
+          <input type="file" accept="image/*" onChange={handleImageChange} />
         </div>
         <button type="submit">Save Changes</button>
       </form>

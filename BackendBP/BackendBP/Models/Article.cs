@@ -14,5 +14,6 @@ namespace BackendBP.Models
         public ArticalPhoto APhoto { get; set; }
         public string UserCreated { get; set; }
 
+
     }
 }

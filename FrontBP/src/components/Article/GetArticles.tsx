@@ -1,3 +1,5 @@
+// components/Article/UserArticles.tsx
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Article } from "../../models/Article";
@@ -18,7 +20,7 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
 
   const fetchUserArticles = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.get<Article[]>(
         `http://localhost:5000/api/Article/my/${userEmail}`,
         {
           headers: {
@@ -45,12 +47,12 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
   };
 
   const goBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate("/dashboard");
   };
 
   return (
     <div className={GetArticlesCSS.container}>
-      <h2> Articles</h2>
+      <h2>Articles</h2>
       <table className={GetArticlesCSS.table}>
         <thead>
           <tr>
@@ -58,6 +60,7 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
             <th>Price</th>
             <th>Quantity</th>
             <th>Description</th>
+            <th>Image</th>
             <th>Edit</th>
           </tr>
         </thead>
@@ -68,6 +71,19 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
               <td>{article.price}</td>
               <td>{article.quantity}</td>
               <td>{article.description}</td>
+              <td>
+                {article.aPhoto ? (
+                  <div>
+                    <img
+                      src={article.aPhoto.url}
+                      alt={article.name}
+                      className={GetArticlesCSS.image}
+                    />
+                  </div>
+                ) : (
+                  <p>No photo available</p>
+                )}
+              </td>
               <td>
                 <button onClick={() => handleEditArticle(article.id)}>
                   Edit
