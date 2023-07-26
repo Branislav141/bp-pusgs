@@ -9,36 +9,36 @@
   flex-direction: column;
 }
 
-h2 {
+.h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
 }
 
-form div {
+.form div {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
 }
 
-label {
+.label {
   font-weight: bold;
   margin-right: 10px;
 }
 
-input,
-textarea {
+.input,
+.textarea {
   flex: 1;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-textarea {
+.textarea {
   resize: vertical;
   min-height: 100px;
 }

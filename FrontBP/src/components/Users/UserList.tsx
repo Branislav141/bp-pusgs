@@ -19,6 +19,7 @@ function UserList() {
       const response = await axios.get("http://localhost:5000/api/Users", {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       });
 

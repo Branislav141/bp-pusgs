@@ -26,3 +26,15 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.imageContainer {
+  max-width: 120px;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}

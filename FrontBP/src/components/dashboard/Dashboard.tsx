@@ -11,25 +11,29 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get<User>(
-          "http://localhost:5000/api/Users/user",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const userData = response.data;
-        setUser(userData);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     fetchUserData();
   }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get<User>(
+        "http://localhost:5000/api/Users/user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Convert birthday to a Date object
+      const userData = response.data;
+      userData.birthday = new Date(userData.birthday);
+
+      setUser(userData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const goToUserList = () => {
     navigate("/dashboard/userList");
@@ -54,7 +58,7 @@ const Dashboard: React.FC = () => {
           <p>Email: {user.email}</p>
           <p>Username: {user.userName}</p>
           <p>Surname: {user.surname}</p>
-          <p>Birthday: {user.birthday}</p>
+          <p>Birthday: {user.birthday.toDateString()}</p>
           <p>Address: {user.address}</p>
           {user.photoUser ? (
             <div className={DashboardCSS["user-photo"]}>

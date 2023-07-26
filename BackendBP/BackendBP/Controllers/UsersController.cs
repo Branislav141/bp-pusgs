@@ -1,12 +1,16 @@
 ﻿using BackendBP.Areas.Identity.Data;
 using BackendBP.Dtos;
+using BackendBP.Migrations.Data;
 using BackendBP.Models;
 using EmailService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -68,34 +72,66 @@ namespace BackendBP.Controllers
 
 
 
-        
-        [HttpPost("user/update")]
-        
-        public async Task<IActionResult> UpdateUser([FromBody] EditProfileModel model)
+        [HttpPut("user/update")]
+        public async Task<IActionResult> UpdateUser([FromForm] EditProfileModel updatedUser, IFormFile imageFile)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var user = await _userManager.GetUserAsync(User);
+            var userName = User.Identity.Name;
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
             if (user == null)
+            {
                 return NotFound();
+            }
 
-            user.UserName = model.UserName;
-            user.Email = model.Email;
-            user.Name = model.Name;
-            user.Surname = model.Surname;
-            user.Birthday = model.Birthday;
-            user.Address = model.Address;
+            
+            user.Name = updatedUser.Name;
+            user.Surname = updatedUser.Surname;
+            user.Birthday = updatedUser.Birthday;
+            user.Address = updatedUser.Address;
 
-            var result = await _userManager.UpdateAsync(user);
+            if (imageFile != null)
+            {
+                
+                var photoUrl = await UploadPhoto(imageFile);
+                user.PhotoUser = new Photo { Url = photoUrl };
+            }
 
-            if (result.Succeeded)
-                return Ok();
+            
+            await _dbContext.SaveChangesAsync();
 
-            return BadRequest(result.Errors);
+            return Ok(user);
         }
 
+
+
+
+
+        [HttpPost("uploadPhoto")]
+        public async Task<string> UploadPhoto(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                throw new ArgumentException("Invalid file.");
+            }
+
+            try
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Images", fileName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                string photoUrl = $"{Request.Scheme}://{Request.Host}/Resources/Images/{fileName}";
+                return photoUrl;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error uploading photo.", e);
+            }
+        }
 
 
 

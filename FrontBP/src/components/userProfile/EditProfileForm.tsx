@@ -3,84 +3,103 @@ import axios from "axios";
 import { useTokenStore } from "../../store/useTokenStore";
 import styles from "./EditProfileForm.module.css";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../models/User";
 
 const EditProfileForm: React.FC = () => {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [address, setAddress] = useState("");
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
   const token = useTokenStore((state) => state.token);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/Users/user",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const userData = response.data;
-        setUserName(userData.userName || "");
-        setEmail(userData.email || "");
-        setName(userData.name || "");
-        setSurname(userData.surname || "");
-        const formattedBirthday = userData.birthday
-          ? userData.birthday.split("T")[0]
-          : "";
-        setBirthday(formattedBirthday);
-        setAddress(userData.address || "");
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     fetchUserData();
-  }, [token]);
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get<User>(
+        "http://localhost:5000/api/Users/user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    const updatedProfile = {
-      userName,
-      email,
-      name,
-      surname,
-      birthday: new Date(birthday),
-      address,
-    };
+      const userData = response.data;
+      userData.birthday = new Date(userData.birthday);
 
-    axios
-      .post("http://localhost:5000/api/Users/user/update", updatedProfile, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log("Profile updated successfully");
-        navigate("/dashboard");
-      })
-      .catch((error) => {
-        console.error("Failed to update profile", error);
-      });
+      setUser(userData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
   };
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    setNewImageFile(file);
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser!,
+      [name]: value,
+    }));
+  };
+
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleFormSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("userName", user?.userName || "");
+      formData.append("email", user?.email || "");
+      formData.append("name", user?.name || "");
+      formData.append("surname", user?.surname || "");
+      formData.append("birthday", formatDate(new Date(user?.birthday || "")));
+      formData.append("address", user?.address || "");
+      if (newImageFile) {
+        formData.append("imageFile", newImageFile);
+      }
+
+      await axios.put("http://localhost:5000/api/Users/user/update", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("User updated successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={handleFormSubmit}>
       <h1>Edit user data</h1>
       <div>
         <label htmlFor="userName">Username:</label>
         <input
           type="text"
           id="userName"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          required
+          name="name"
+          value={user?.userName}
+          onChange={handleInputChange}
           className={styles.input}
         />
       </div>
@@ -89,9 +108,9 @@ const EditProfileForm: React.FC = () => {
         <input
           type="email"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          name="email"
+          value={user.email}
+          onChange={handleInputChange}
           className={styles.input}
         />
       </div>
@@ -100,9 +119,9 @@ const EditProfileForm: React.FC = () => {
         <input
           type="text"
           id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
+          name="name"
+          value={user.name}
+          onChange={handleInputChange}
           className={styles.input}
         />
       </div>
@@ -111,9 +130,9 @@ const EditProfileForm: React.FC = () => {
         <input
           type="text"
           id="surname"
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
-          required
+          name="surname"
+          value={user.surname}
+          onChange={handleInputChange}
           className={styles.input}
         />
       </div>
@@ -122,9 +141,9 @@ const EditProfileForm: React.FC = () => {
         <input
           type="date"
           id="birthday"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          required
+          name="birthday"
+          value={formatDate(user.birthday)}
+          onChange={handleInputChange}
           className={styles.input}
         />
       </div>
@@ -133,11 +152,25 @@ const EditProfileForm: React.FC = () => {
         <input
           type="text"
           id="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
+          name="address"
+          value={user.address}
+          onChange={handleInputChange}
           className={styles.input}
         />
+      </div>
+      <div>
+        <label>Current Image:</label>
+        {user.photoUser ? (
+          <div className={styles.imageContainer}>
+            <img src={user.photoUser.url} alt={user.name} />
+          </div>
+        ) : (
+          <p>No photo available</p>
+        )}
+      </div>
+      <div>
+        <label>Upload New Image:</label>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
       </div>
       <button type="submit" className={styles.button}>
         Save

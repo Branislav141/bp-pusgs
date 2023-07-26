@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace BackendBP.Dtos
 {
@@ -11,5 +12,8 @@ namespace BackendBP.Dtos
         public string Surname { get; set; }
         public DateTime Birthday { get; set; }
         public string Address { get; set; }
+        public bool IsPhotoDeleted { get; set; }
+        public IFormFile ImageFile { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }
