@@ -1,5 +1,3 @@
-// components/Article/UserArticles.tsx
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Article } from "../../models/Article";
@@ -46,6 +44,22 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
     navigate(`/dashboard/myArticles/editArticle/${articleId}`);
   };
 
+  const handleDeleteArticle = async (articleId: number) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/Article/${articleId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Article deleted successfully!");
+
+      fetchUserArticles();
+    } catch (error) {
+      console.error("Error deleting article:", error);
+    }
+  };
+
   const goBack = () => {
     navigate("/dashboard");
   };
@@ -62,6 +76,7 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
             <th>Description</th>
             <th>Image</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -87,6 +102,11 @@ const UserArticles = ({ userEmail }: { userEmail: string }) => {
               <td>
                 <button onClick={() => handleEditArticle(article.id)}>
                   Edit
+                </button>
+              </td>
+              <td>
+                <button onClick={() => handleDeleteArticle(article.id)}>
+                  Delete
                 </button>
               </td>
             </tr>

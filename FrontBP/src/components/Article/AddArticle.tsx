@@ -11,7 +11,6 @@ interface ArticleModel {
   Quantity: string;
   Description: string;
   photoUrl: string;
-  UserCreated: string;
 }
 
 const AddArticleForm: React.FC = () => {
@@ -25,7 +24,6 @@ const AddArticleForm: React.FC = () => {
     Quantity: "",
     Description: "",
     photoUrl: "",
-    UserCreated: "",
   });
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -53,6 +51,7 @@ const AddArticleForm: React.FC = () => {
         }
       );
       alert("Article added successfully!");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error adding article:", error);
     }
@@ -80,7 +79,7 @@ const AddArticleForm: React.FC = () => {
 
         setArticleData((prevFormData) => ({
           ...prevFormData,
-          ArticlePhotoUrl: response.data.photoUrl,
+          photoUrl: response.data,
         }));
         toast.success("Photo uploaded successfully!");
       } catch (error) {
@@ -126,6 +125,7 @@ const AddArticleForm: React.FC = () => {
         value={articleData.Description}
         onChange={handleChange}
       />
+
       <div>
         <h3>Upload article picture</h3>
         <input type="file" onChange={handleFileChange} />
@@ -136,13 +136,7 @@ const AddArticleForm: React.FC = () => {
       <button className={AddArticleCSS["prodavac-button"]} type="submit">
         Add Article
       </button>
-      <button
-        onClick={goBack}
-        className={AddArticleCSS["back-button"]}
-        type="submit"
-      >
-        Back
-      </button>
+
       <ToastContainer />
     </form>
   );

@@ -50,7 +50,7 @@ namespace BackendBP.Controllers
 
             Article article = new Article()
             {
-                Id = artToAdd.Id,
+                
                 Name = artToAdd.Name,
                 Quantity = artToAdd.Quantity,
                 Description = artToAdd.Description,
@@ -58,9 +58,9 @@ namespace BackendBP.Controllers
                 UserCreated = user.Email,
             };
 
-            if (!string.IsNullOrEmpty(artToAdd.ArticlePhotoUrl))
+            if (!string.IsNullOrEmpty(artToAdd.PhotoUrl))
             {
-                article.APhoto = new ArticalPhoto { Url = artToAdd.ArticlePhotoUrl, IsDeleted = false };
+                article.APhoto = new ArticalPhoto { Url = artToAdd.PhotoUrl, IsDeleted = false };
             }
 
             _dbContext.Articles.Add(article);
@@ -131,6 +131,30 @@ namespace BackendBP.Controllers
             await _dbContext.SaveChangesAsync();
 
             return Ok(article);
+        }
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteArticle(int id)
+        {
+            var article = await _dbContext.Articles.Include(a => a.APhoto).FirstOrDefaultAsync(a => a.Id == id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            if (article.APhoto != null)
+            {
+                
+                _dbContext.ArticalPhotos.Remove(article.APhoto);
+            }
+
+            _dbContext.Articles.Remove(article);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok("Article and associated photo deleted successfully!");
         }
 
 

@@ -17,7 +17,6 @@ const GetUser = ({ userId }: GetUserProps) => {
         );
         setUser(response.data);
       } catch (error) {
-        // Handle any errors from the API
         console.error("Error fetching user:", error);
       }
     };
