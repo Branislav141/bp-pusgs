@@ -25,7 +25,6 @@ const Dashboard: React.FC = () => {
         }
       );
 
-      // Convert birthday to a Date object
       const userData = response.data;
       userData.birthday = new Date(userData.birthday);
 
@@ -41,12 +40,17 @@ const Dashboard: React.FC = () => {
 
   const isAdmin = user?.accountType === "administrator";
   const isProdavac = user?.accountType === "prodavac";
+  const isKupac = user?.accountType === "kupac";
+
   const goToAddArticle = () => {
     navigate("/dashboard/addArticle");
   };
 
   const goToMyArticles = () => {
     navigate("/dashboard/myArticles");
+  };
+  const goToShop = () => {
+    navigate("/dashboard/Shop");
   };
 
   return (
@@ -88,6 +92,16 @@ const Dashboard: React.FC = () => {
                 onClick={goToMyArticles}
               >
                 My Articles
+              </button>
+            </>
+          )}
+          {isKupac && (
+            <>
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={goToShop}
+              >
+                Shop
               </button>
             </>
           )}

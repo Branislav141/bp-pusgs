@@ -31,6 +31,16 @@ namespace BackendBP.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
+        public IActionResult GetArticles()
+        {
+            List<Article> articles = _dbContext.Articles
+                .Include(a => a.APhoto)
+                .ToList();
+
+            return Ok(articles);
+        }
+
         [HttpGet("my/{email}")]
         public IActionResult GetAllArticles(string email)
         {

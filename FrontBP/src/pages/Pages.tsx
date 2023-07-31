@@ -7,10 +7,11 @@ import Dashboard from "../components/dashboard/Dashboard";
 import NotLoggedInGuard from "../components/guards/NotLoggedInGuard";
 import EditProfileForm from "../components/userProfile/EditProfileForm";
 import UserList from "../components/Users/UserList";
-import AddArticle from "../components/Article/AddArticle";
-import GetArticles from "../components/Article/GetArticles";
+import AddArticle from "../components/Article/AddArticle/AddArticle";
+import GetMyArticles from "../components/Article/GetMyArticles/GetMyArticles";
 import { useState, useEffect } from "react";
-import EditArticle from "../components/Article/EditArticle";
+import EditArticle from "../components/Article/EditArticle/EditArticle";
+import AllArticles from "../components/Article/AllArticles/AllArticles";
 
 export default function Pages() {
   const [userEmail, setUserEmail] = useState<string>(() => {
@@ -41,12 +42,13 @@ export default function Pages() {
           <Route path="/dashboard/addArticle" element={<AddArticle />} />
           <Route
             path="/dashboard/myArticles"
-            element={<GetArticles userEmail={userEmail} />}
+            element={<GetMyArticles userEmail={userEmail} />}
           />
           <Route
             path="/dashboard/myArticles/editArticle/:articleId"
             element={<EditArticle />}
           />
+          <Route path="/dashboard/Shop" element={<AllArticles />} />
         </Route>
       </Routes>
     </>

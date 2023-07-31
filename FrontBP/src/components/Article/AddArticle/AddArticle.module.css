@@ -36,11 +36,13 @@
   color: gray;
 }
 
-.prodavac-button,
-.back-button,
-.admin-button {
-  display: inline-block;
-  background-color: #007bff;
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.prodavac-button {
+  background-color: #28a745;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -49,13 +51,20 @@
   margin: 5px;
 }
 
-.prodavac-button,
-.back-button {
-  background-color: #28a745;
+.prodavac-button:hover {
+  background-color: #0056b3;
 }
 
-.prodavac-button:hover,
-.back-button:hover,
-.admin-button:hover {
+.back-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.back-button:hover {
   background-color: #0056b3;
 }

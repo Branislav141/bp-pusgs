@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import AddArticleCSS from "../Article/AddArticle.module.css";
+import AddArticleCSS from "../AddArticle/AddArticle.module.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { useTokenStore } from "../../store/useTokenStore";
+import { useTokenStore } from "../../../store/useTokenStore";
 
 interface ArticleModel {
   Name: string;
@@ -90,55 +90,64 @@ const AddArticleForm: React.FC = () => {
   }
 
   return (
-    <form className={AddArticleCSS["user-info"]} onSubmit={handleSubmit}>
-      <h1 className={AddArticleCSS.title}>Add Article</h1>
+    <div>
+      <form className={AddArticleCSS["user-info"]} onSubmit={handleSubmit}>
+        <h1 className={AddArticleCSS.title}>Add Article</h1>
 
-      <input
-        className={AddArticleCSS["form-input"]}
-        type="text"
-        name="Name"
-        placeholder="Article Name"
-        value={articleData.Name}
-        onChange={handleChange}
-      />
-      <input
-        className={AddArticleCSS["form-input"]}
-        type="number"
-        name="Price"
-        placeholder="Price"
-        value={articleData.Price}
-        onChange={handleChange}
-      />
-      <input
-        className={AddArticleCSS["form-input"]}
-        type="number"
-        name="Quantity"
-        placeholder="Quantity"
-        value={articleData.Quantity}
-        onChange={handleChange}
-      />
-      <input
-        className={AddArticleCSS["form-description"]}
-        type="text"
-        name="Description"
-        placeholder="Description"
-        value={articleData.Description}
-        onChange={handleChange}
-      />
-
-      <div>
-        <h3>Upload article picture</h3>
-        <input type="file" onChange={handleFileChange} />
-        <button type="button" onClick={handleUpload}>
-          Upload
-        </button>
-      </div>
-      <button className={AddArticleCSS["prodavac-button"]} type="submit">
-        Add Article
-      </button>
-
+        <input
+          className={AddArticleCSS["form-input"]}
+          type="text"
+          name="Name"
+          placeholder="Article Name"
+          value={articleData.Name}
+          onChange={handleChange}
+        />
+        <input
+          className={AddArticleCSS["form-input"]}
+          type="number"
+          name="Price"
+          placeholder="Price"
+          value={articleData.Price}
+          onChange={handleChange}
+        />
+        <input
+          className={AddArticleCSS["form-input"]}
+          type="number"
+          name="Quantity"
+          placeholder="Quantity"
+          value={articleData.Quantity}
+          onChange={handleChange}
+        />
+        <input
+          className={AddArticleCSS["form-description"]}
+          type="text"
+          name="Description"
+          placeholder="Description"
+          value={articleData.Description}
+          onChange={handleChange}
+        />
+        <div>
+          <h3>Upload article picture</h3>
+          <input type="file" onChange={handleFileChange} />
+          <button type="button" onClick={handleUpload}>
+            Upload
+          </button>
+        </div>
+        <div className={AddArticleCSS["button-container"]}>
+          <button className={AddArticleCSS["prodavac-button"]} type="submit">
+            Add Article
+          </button>
+          <button
+            className={AddArticleCSS["back-button"]}
+            type="button"
+            onClick={goBack}
+          >
+            Back
+          </button>
+        </div>
+      </form>
       <ToastContainer />
-    </form>
+    </div>
   );
 };
 

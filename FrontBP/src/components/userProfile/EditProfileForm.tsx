@@ -45,9 +45,13 @@ const EditProfileForm: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
+
+    // Check if the input is the date field and convert its value to a Date object
+    const parsedValue = name === "birthday" ? new Date(value) : value;
+
     setUser((prevUser) => ({
       ...prevUser!,
-      [name]: value,
+      [name]: parsedValue,
     }));
   };
 
@@ -90,21 +94,25 @@ const EditProfileForm: React.FC = () => {
   }
 
   return (
-    <form className={styles.container} onSubmit={handleFormSubmit}>
-      <h1>Edit user data</h1>
-      <div>
-        <label htmlFor="userName">Username:</label>
+    <form className={styles.form} onSubmit={handleFormSubmit}>
+      <h1 className={styles.title}>Edit user data</h1>
+      <div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor="userName">
+          Username:
+        </label>
         <input
           type="text"
           id="userName"
-          name="name"
+          name="userName"
           value={user?.userName}
           onChange={handleInputChange}
           className={styles.input}
         />
       </div>
-      <div>
-        <label htmlFor="email">Email:</label>
+      <div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor="email">
+          Email:
+        </label>
         <input
           type="email"
           id="email"
@@ -114,8 +122,10 @@ const EditProfileForm: React.FC = () => {
           className={styles.input}
         />
       </div>
-      <div>
-        <label htmlFor="name">Name:</label>
+      <div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor="name">
+          Name:
+        </label>
         <input
           type="text"
           id="name"
@@ -125,8 +135,10 @@ const EditProfileForm: React.FC = () => {
           className={styles.input}
         />
       </div>
-      <div>
-        <label htmlFor="surname">Surname:</label>
+      <div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor="surname">
+          Surname:
+        </label>
         <input
           type="text"
           id="surname"
@@ -136,8 +148,10 @@ const EditProfileForm: React.FC = () => {
           className={styles.input}
         />
       </div>
-      <div>
-        <label htmlFor="birthday">Birthday:</label>
+      <div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor="birthday">
+          Birthday:
+        </label>
         <input
           type="date"
           id="birthday"
@@ -147,8 +161,10 @@ const EditProfileForm: React.FC = () => {
           className={styles.input}
         />
       </div>
-      <div>
-        <label htmlFor="address">Address:</label>
+      <div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor="address">
+          Address:
+        </label>
         <input
           type="text"
           id="address"
@@ -158,25 +174,34 @@ const EditProfileForm: React.FC = () => {
           className={styles.input}
         />
       </div>
+      <br />
       <div>
-        <label>Current Image:</label>
+        <label className={styles.label}>Current Image:</label>
         {user.photoUser ? (
           <div className={styles.imageContainer}>
-            <img src={user.photoUser.url} alt={user.name} />
+            <img
+              src={user.photoUser.url}
+              alt={user.name}
+              className={styles.image}
+            />
           </div>
         ) : (
           <p>No photo available</p>
         )}
       </div>
       <div>
-        <label>Upload New Image:</label>
-        <input type="file" accept="image/*" onChange={handleImageChange} />
+        <label className={styles.label}>Upload New Image:</label>
+        <input
+          className={styles.fileInput}
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
       </div>
-      <button type="submit" className={styles.button}>
+      <button type="submit" className={styles.submit}>
         Save
       </button>
     </form>
   );
 };
-
 export default EditProfileForm;

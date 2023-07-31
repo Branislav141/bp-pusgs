@@ -75,16 +75,17 @@ namespace BackendBP.Controllers
         [HttpPut("user/update")]
         public async Task<IActionResult> UpdateUser([FromForm] EditProfileModel updatedUser, IFormFile imageFile)
         {
-            var userName = User.Identity.Name;
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            var name = User.Identity.Name;
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == name);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            
+            user.UserName = updatedUser.UserName;
             user.Name = updatedUser.Name;
+            user.Email = updatedUser.Email;
             user.Surname = updatedUser.Surname;
             user.Birthday = updatedUser.Birthday;
             user.Address = updatedUser.Address;

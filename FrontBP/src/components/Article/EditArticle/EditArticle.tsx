@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Article } from "../../models/Article";
-import { useTokenStore } from "../../store/useTokenStore";
+import { Article } from "../../../models/Article";
+import { useTokenStore } from "../../../store/useTokenStore";
 import EditArticleCSS from "./EditArticle.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
