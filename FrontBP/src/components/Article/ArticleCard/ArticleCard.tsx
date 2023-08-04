@@ -1,7 +1,7 @@
 import React from "react";
 import { Article } from "../../../models/Article";
 import CardModuleCSS from "../ArticleCard/Card.module.css";
-import { useShoppingCart } from "../../ShoppingCart/ShoppingCartProvider";
+import { useShoppingCart } from "../../ShoppingCart/Cart/ShoppingCartProvider";
 
 interface ArticleCardProps {
   article: Article;

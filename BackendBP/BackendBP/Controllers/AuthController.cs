@@ -42,7 +42,7 @@ namespace BackendBP.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-            // Find the user by email
+           
             var user = _dbContext.Users.FirstOrDefault(user => user.Email == loginModel.Email);
             if (user != null)
             {
@@ -51,14 +51,14 @@ namespace BackendBP.Controllers
                     return BadRequest("Your account is not active. Please wait for approval or contact support.");
 
                 }
-                // Check if the provided password is valid
+                
                 var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
 
                 if (signInResult.Succeeded)
                 {
 
                   
-                    // Generate a JWT token for the authenticated user
+                   
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = Encoding.ASCII.GetBytes("MY_BIG_SECRET_KEY_GHJDKGDSNGNDSNJKGNJDS");
 
@@ -69,7 +69,7 @@ namespace BackendBP.Controllers
                         new Claim(ClaimTypes.Name, user.Name),
                     };
 
-                    // Assign user.AccountType to the role claim
+                    
                     if (!await _roleManager.RoleExistsAsync(user.AccountType))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(user.AccountType));

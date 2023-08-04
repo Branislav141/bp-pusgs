@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useShoppingCart } from "./ShoppingCartProvider";
-import { Article } from "../../models/Article";
-import ShopingCartCSS from "../ShoppingCart/ShoppingCart.module.css";
-import QuantityModal from "./QuantityModal";
+
+import ShopingCartCSS from "../Cart/ShoppingCart.module.css";
+import QuantityModal from "../Modal/QuantityModal";
+import { Article } from "../../../models/Article";
 
 const ShoppingCart: React.FC = () => {
   const { cartItems, removeFromCart } = useShoppingCart();

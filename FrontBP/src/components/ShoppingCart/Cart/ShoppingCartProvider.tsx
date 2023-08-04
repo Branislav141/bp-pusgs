@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Article } from "../../models/Article";
+import { Article } from "../../../models/Article";
 
 interface ShoppingCartContextValue {
   cartItems: Article[];

@@ -5,8 +5,9 @@ import { removeToken } from "../../store/useTokenStore";
 import { useNavigate } from "react-router-dom";
 import logo from "../../photos/bplogo.jpg";
 import { FaShoppingCart } from "react-icons/fa";
-import { useShoppingCart } from "../ShoppingCart/ShoppingCartProvider";
+
 import { Article } from "../../models/Article";
+import { useShoppingCart } from "../ShoppingCart/Cart/ShoppingCartProvider";
 
 const NavbarUlogovani: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);

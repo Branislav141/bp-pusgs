@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import QuantityModalCSS from "../ShoppingCart/QuantityModal.module.css";
+import QuantityModalCSS from "../Modal/QuantityModal.module.css";
 import axios from "axios";
-import { useTokenStore } from "../../store/useTokenStore";
-import { Article } from "../../models/Article";
+
 import { useNavigate } from "react-router-dom";
+import { Article } from "../../../models/Article";
+import { useTokenStore } from "../../../store/useTokenStore";
 
 interface QuantityModalProps {
   total: number;
   cartItems: Article[];
   article: Article;
   onClose: () => void;
-  onConfirm: (total: number, deliveryAddress: string) => void;
+  onConfirm: (total: number, deliveryAddress: string, comment: string) => void;
   quantities: { [itemId: number]: number };
   removeFromCart: (itemId: number) => void;
 }
@@ -26,6 +27,7 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
 }) => {
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [isAddressEmpty, setIsAddressEmpty] = useState<boolean>(false);
+  const [comment, setComment] = useState<string>("");
   const token = useTokenStore((state) => state.token);
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
           cartItems,
           DeliveryAddress: deliveryAddress,
           TotalPrice: total,
-          Comment: "",
+          Comment: comment,
         },
         {
           headers: {
@@ -55,7 +57,7 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
       );
 
       console.log("New order created:", response.data);
-      onConfirm(total, deliveryAddress);
+      onConfirm(total, deliveryAddress, comment);
 
       cartItems.forEach((item) => {
         removeFromCart(item.id);
@@ -65,6 +67,12 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
     } catch (error) {
       console.error("Error creating the order:", error);
     }
+  };
+
+  const handleCommentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setComment(event.target.value);
   };
 
   const handleDeliveryAddressChange = (
@@ -90,6 +98,12 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
             className={`${QuantityModalCSS["delivery-address-input"]} ${
               isAddressEmpty ? QuantityModalCSS["empty-address"] : ""
             }`}
+          />
+          <textarea
+            value={comment}
+            onChange={handleCommentChange}
+            placeholder="Your Comment"
+            className={QuantityModalCSS["comment-textarea"]}
           />
         </div>
         <div className={QuantityModalCSS["button-container"]}>

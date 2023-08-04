@@ -27,12 +27,13 @@ public class OrderController : ControllerBase
     }
 
 
-    [HttpGet]
+    [HttpGet("GetAllOrders")]
     public IActionResult GetAllOrders()
     {
         List<Order> orders = _dbContext.Orders
-            .Include(o => o.Articles)
-            .ToList();
+       .Include(o => o.Articles)
+           .ThenInclude(a => a.APhoto)
+       .ToList();
 
         return Ok(orders);
     }
@@ -56,13 +57,13 @@ public class OrderController : ControllerBase
 
             var orderArticles = new List<Article>();
 
-            // Kreirajte kopije artikala sa ažuriranim količinama za porudžbinu
+            
             foreach (var item in inputModel.cartItems)
             {
                 var itemId = item.Id;
                 var quantity = inputModel.Quantities.ContainsKey(itemId) ? inputModel.Quantities[itemId] : 1;
 
-                // Kreirajte kopiju artikla sa ažuriranom količinom i ostalim potrebnim property-ima
+             
                 var orderArticle = new Article
                 {
                    
@@ -71,17 +72,18 @@ public class OrderController : ControllerBase
                     Quantity = quantity,
                     Description = item.Description,
                     UserCreated=item.UserCreated,
-                    APhoto = new ArticalPhoto // Kreiranje nove instance ArticalPhoto za svaki Article
+                    APhoto = new ArticalPhoto 
                     {
-                        Url = item.APhoto.Url, // Postavite URL slike artikla ovdje, pretpostavka da ga imate u cartItems ili negde drugde
-                        IsDeleted = false // Postavite ovu vrednost prema vašim potrebama
+                        
+                        Url = item.APhoto.Url, 
+                        IsDeleted = false 
                     }
                 };
 
                 orderArticles.Add(orderArticle);
             }
 
-            // Kreirajte novu porudžbinu sa kopijama artikala
+            
             var order = new Order
             {
                 Articles = orderArticles,

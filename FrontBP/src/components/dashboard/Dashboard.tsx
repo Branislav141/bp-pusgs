@@ -53,6 +53,10 @@ const Dashboard: React.FC = () => {
     navigate("/dashboard/Shop");
   };
 
+  const goToAllOrders = () => {
+    navigate("/dashboard/AllOrders");
+  };
+
   return (
     <div className={DashboardCSS.container}>
       {user ? (
@@ -72,12 +76,20 @@ const Dashboard: React.FC = () => {
             <p>No photo available</p>
           )}
           {isAdmin && (
-            <button
-              className={DashboardCSS["admin-button"]}
-              onClick={goToUserList}
-            >
-              User List
-            </button>
+            <>
+              <button
+                className={DashboardCSS["admin-button"]}
+                onClick={goToUserList}
+              >
+                User List
+              </button>
+              <button
+                className={DashboardCSS["admin-button"]}
+                onClick={goToAllOrders}
+              >
+                All Orders
+              </button>
+            </>
           )}
           {isProdavac && (
             <>

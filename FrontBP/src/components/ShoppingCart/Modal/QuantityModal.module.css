@@ -1,3 +1,5 @@
+/* QuantityModal.module.css */
+
 .modal-container {
   position: fixed;
   top: 0;
@@ -15,6 +17,8 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px; /* Proširili smo prozor do 500 piksela */
+  width: 80%; /* Procentualna širina prozora u odnosu na ekran */
 }
 
 .modal-content h2 {
@@ -24,8 +28,8 @@
 
 .input-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .quantity-input {
@@ -79,8 +83,22 @@
   border-radius: 3px;
   font-size: 16px;
   margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .empty-address {
   border: 2px solid red;
+}
+
+.comment-container {
+  margin-top: 20px;
+}
+
+.comment-textarea {
+  width: 100%;
+  resize: none;
+  padding-top: 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
