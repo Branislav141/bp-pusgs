@@ -50,3 +50,17 @@
   width: 60px;
   height: 60px;
 }
+
+.menuButtonsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.shoppingCartButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}

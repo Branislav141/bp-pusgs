@@ -13,7 +13,7 @@ namespace BackendBP.Models
         public string Description { get; set; }
         public ArticalPhoto APhoto { get; set; }
         public string UserCreated { get; set; }
-
+        public int? OrderId { get; set; }
 
     }
 }

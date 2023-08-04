@@ -12,6 +12,7 @@ import GetMyArticles from "../components/Article/GetMyArticles/GetMyArticles";
 import { useState, useEffect } from "react";
 import EditArticle from "../components/Article/EditArticle/EditArticle";
 import AllArticles from "../components/Article/AllArticles/AllArticles";
+import ShoppingCart from "../components/ShoppingCart/ShoppingCart";
 
 export default function Pages() {
   const [userEmail, setUserEmail] = useState<string>(() => {
@@ -48,7 +49,8 @@ export default function Pages() {
             path="/dashboard/myArticles/editArticle/:articleId"
             element={<EditArticle />}
           />
-          <Route path="/dashboard/Shop" element={<AllArticles />} />
+          <Route path="/dashboard/Shop" element={<AllArticles />} />{" "}
+          <Route path="/dashboard/shoppingCart" element={<ShoppingCart />} />
         </Route>
       </Routes>
     </>

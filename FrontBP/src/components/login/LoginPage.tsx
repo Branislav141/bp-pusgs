@@ -30,15 +30,12 @@ const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
 
       setToken(token);
 
-      // Call onLogin with the user's email when login is successful
       onLogin(email);
 
-      // Show success toast message
       toast.success("Login successful!");
     } catch (error) {
       console.error("Login failed", error);
 
-      // Show error toast message
       toast.error("Login failed. Please try again.");
     } finally {
       setModalOpen(true);

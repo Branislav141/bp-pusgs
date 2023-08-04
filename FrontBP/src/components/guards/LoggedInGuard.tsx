@@ -10,7 +10,6 @@ export default function LoggedInGuard() {
 
   return (
     <>
-      {/* navbar za one koji su ulogovani */}
       <NavbarUlogovani></NavbarUlogovani>
       <Outlet />
     </>

@@ -1,8 +1,8 @@
 export interface Article {
   id: number;
   name: string;
-  price: string;
-  quantity: string;
+  price: number;
+  quantity: number;
   description: string;
   UserCreated: string;
   aPhoto: ArticlePhoto | null;

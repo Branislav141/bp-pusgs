@@ -11,6 +11,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 
+.back-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .back-button {
   background-color: #ff0000;
   color: #fff;
@@ -19,7 +25,6 @@
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 20px;
 }
 
 .back-button:hover {

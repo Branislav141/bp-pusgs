@@ -34,7 +34,7 @@ namespace BackendBP.Controllers
         [HttpGet]
         public IActionResult GetArticles()
         {
-            List<Article> articles = _dbContext.Articles
+            List<Article> articles = _dbContext.Articles.Where(x=> x.OrderId==null)
                 .Include(a => a.APhoto)
                 .ToList();
 
@@ -45,7 +45,7 @@ namespace BackendBP.Controllers
         public IActionResult GetAllArticles(string email)
         {
             List<Article> articles = _dbContext.Articles
-                .Where(x => x.UserCreated == email)
+                .Where(x => x.UserCreated == email && x.OrderId==null )
                 .Include(a => a.APhoto)
                 .ToList();
 

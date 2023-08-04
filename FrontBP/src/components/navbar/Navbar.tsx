@@ -1,8 +1,7 @@
-// Navbar.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import NavbarCSS from "./Navbar.module.css";
-import logo from "../../photos/bplogo.jpg"; // Replace with the path to your logo image
+import logo from "../../photos/bplogo.jpg";
 
 const Navbar: React.FC = () => {
   return (

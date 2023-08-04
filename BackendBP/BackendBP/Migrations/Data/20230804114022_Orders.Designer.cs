@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendBP.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230718222921_Articles")]
-    partial class Articles
+    [Migration("20230804114022_Orders")]
+    partial class Orders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,9 @@ namespace BackendBP.Migrations.Data
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -68,7 +71,36 @@ namespace BackendBP.Migrations.Data
 
                     b.HasIndex("APhotoId");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("BackendBP.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliveryAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BackendBP.Models.Article", b =>
@@ -77,7 +109,16 @@ namespace BackendBP.Migrations.Data
                         .WithMany()
                         .HasForeignKey("APhotoId");
 
+                    b.HasOne("BackendBP.Models.Order", null)
+                        .WithMany("Articles")
+                        .HasForeignKey("OrderId");
+
                     b.Navigation("APhoto");
+                });
+
+            modelBuilder.Entity("BackendBP.Models.Order", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

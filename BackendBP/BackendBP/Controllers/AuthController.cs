@@ -46,6 +46,11 @@ namespace BackendBP.Controllers
             var user = _dbContext.Users.FirstOrDefault(user => user.Email == loginModel.Email);
             if (user != null)
             {
+                if(user.AccountType == "prodavac" && (user.AccountStatus== "Declined" || user.AccountStatus == "Pending"))
+                {
+                    return BadRequest("Your account is not active. Please wait for approval or contact support.");
+
+                }
                 // Check if the provided password is valid
                 var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
 
@@ -83,6 +88,7 @@ namespace BackendBP.Controllers
 
                     return Ok(new { token = tokenString, user = user });
                 }
+               
                 else
                 {
                     return BadRequest("Password not valid");

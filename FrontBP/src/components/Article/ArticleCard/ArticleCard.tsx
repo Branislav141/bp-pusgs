@@ -1,12 +1,15 @@
 import React from "react";
 import { Article } from "../../../models/Article";
 import CardModuleCSS from "../ArticleCard/Card.module.css";
+import { useShoppingCart } from "../../ShoppingCart/ShoppingCartProvider";
 
 interface ArticleCardProps {
   article: Article;
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
+  const { addToCart } = useShoppingCart();
+
   return (
     <div className={CardModuleCSS["article-card"]}>
       <div>
@@ -25,7 +28,10 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
         <button className={`${CardModuleCSS.btn} ${CardModuleCSS.outline}`}>
           DETAILS
         </button>
-        <button className={`${CardModuleCSS.btn} ${CardModuleCSS.fill}`}>
+        <button
+          className={`${CardModuleCSS.btn} ${CardModuleCSS.fill}`}
+          onClick={() => addToCart(article)}
+        >
           BUY NOW
         </button>
       </div>

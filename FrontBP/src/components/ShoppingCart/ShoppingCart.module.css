@@ -1,0 +1,56 @@
+.shopping-cart {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.shopping-cart table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shopping-cart th,
+.shopping-cart td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.shopping-cart th {
+  background-color: #f2f2f2;
+}
+
+.shopping-cart tr:hover {
+  background-color: #f9f9f9;
+}
+
+.removebutton {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+
+.buyButton {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.articleImg {
+  background-position: center;
+  background-size: cover;
+  height: 200px;
+  width: 200px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.255);
+}

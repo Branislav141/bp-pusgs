@@ -1,6 +1,6 @@
 ﻿using BackendBP.Areas.Identity.Data;
 using BackendBP.Dtos;
-using BackendBP.Migrations.Data;
+
 using BackendBP.Models;
 using EmailService;
 using Microsoft.AspNetCore.Authorization;
