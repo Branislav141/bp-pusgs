@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendBP.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230804114022_Orders")]
-    partial class Orders
+    [Migration("20230805173457_Sell")]
+    partial class Sell
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,36 +71,22 @@ namespace BackendBP.Migrations.Data
 
                     b.HasIndex("APhotoId");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("BackendBP.Models.Order", b =>
+            modelBuilder.Entity("BackendBP.Models.Seller", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeliveryAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeliveryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Sell");
                 });
 
             modelBuilder.Entity("BackendBP.Models.Article", b =>
@@ -109,16 +95,7 @@ namespace BackendBP.Migrations.Data
                         .WithMany()
                         .HasForeignKey("APhotoId");
 
-                    b.HasOne("BackendBP.Models.Order", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("OrderId");
-
                     b.Navigation("APhoto");
-                });
-
-            modelBuilder.Entity("BackendBP.Models.Order", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

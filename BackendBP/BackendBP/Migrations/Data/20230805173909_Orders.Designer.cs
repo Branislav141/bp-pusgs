@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendBP.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230804114005_Articles")]
-    partial class Articles
+    [Migration("20230805173909_Orders")]
+    partial class Orders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,59 @@ namespace BackendBP.Migrations.Data
 
                     b.HasIndex("APhotoId");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("BackendBP.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Buyer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliveryAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BackendBP.Models.Seller", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Sell");
                 });
 
             modelBuilder.Entity("BackendBP.Models.Article", b =>
@@ -80,7 +132,25 @@ namespace BackendBP.Migrations.Data
                         .WithMany()
                         .HasForeignKey("APhotoId");
 
+                    b.HasOne("BackendBP.Models.Order", null)
+                        .WithMany("Articles")
+                        .HasForeignKey("OrderId");
+
                     b.Navigation("APhoto");
+                });
+
+            modelBuilder.Entity("BackendBP.Models.Seller", b =>
+                {
+                    b.HasOne("BackendBP.Models.Order", null)
+                        .WithMany("Sellers")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("BackendBP.Models.Order", b =>
+                {
+                    b.Navigation("Articles");
+
+                    b.Navigation("Sellers");
                 });
 #pragma warning restore 612, 618
         }

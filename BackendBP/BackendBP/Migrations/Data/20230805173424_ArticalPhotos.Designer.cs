@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendBP.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230804113943_ArticalPhotos")]
+    [Migration("20230805173424_ArticalPhotos")]
     partial class ArticalPhotos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

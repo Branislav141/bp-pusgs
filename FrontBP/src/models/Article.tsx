@@ -4,7 +4,7 @@ export interface Article {
   price: number;
   quantity: number;
   description: string;
-  UserCreated: string;
+  userCreated: string;
   aPhoto: ArticlePhoto | null;
 }
 

@@ -67,6 +67,7 @@ namespace BackendBP.Controllers
                         new Claim(ClaimTypes.NameIdentifier,user.Id),
                         new Claim(ClaimTypes.Email, loginModel.Email),
                         new Claim(ClaimTypes.Name, user.Name),
+                        new Claim(ClaimTypes.Role, user.AccountType)
                     };
 
                     

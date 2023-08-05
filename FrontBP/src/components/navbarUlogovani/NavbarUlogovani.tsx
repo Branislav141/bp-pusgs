@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavbarUlogovaniCSS from "./NavbarUlogovani.module.css";
 import menuIcon from "../../photos/slikaAcc.png";
 import { removeToken } from "../../store/useTokenStore";
@@ -8,11 +8,20 @@ import { FaShoppingCart } from "react-icons/fa";
 
 import { Article } from "../../models/Article";
 import { useShoppingCart } from "../ShoppingCart/Cart/ShoppingCartProvider";
+import { useTokenStore } from "../../store/useTokenStore";
 
 const NavbarUlogovani: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isBuyer, setIsBuyer] = useState(false);
   const navigate = useNavigate();
   const { cartItems, removeFromCart } = useShoppingCart();
+
+  const token = useTokenStore((state) => state.token);
+  const userAccountType = useTokenStore((state) => state.accountType);
+
+  useEffect(() => {
+    setIsBuyer(userAccountType === "kupac");
+  }, [userAccountType]);
 
   const handleButtonClick = () => {
     setMenuOpen(!isMenuOpen);
@@ -53,12 +62,14 @@ const NavbarUlogovani: React.FC = () => {
           Profile
         </button>
 
-        <button
-          onClick={goToCart}
-          className={NavbarUlogovaniCSS.shoppingCartButton}
-        >
-          <FaShoppingCart />
-        </button>
+        {isBuyer && (
+          <button
+            onClick={goToCart}
+            className={NavbarUlogovaniCSS.shoppingCartButton}
+          >
+            <FaShoppingCart />
+          </button>
+        )}
       </div>
 
       {isMenuOpen && (

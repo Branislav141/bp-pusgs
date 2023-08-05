@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import LoginPageCSS from "./LoginPage.module.css";
 import { useState } from "react";
 import axios from "axios";
-import { setToken } from "../../store/useTokenStore";
+import { setToken, setUserAccountType } from "../../store/useTokenStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -24,10 +24,11 @@ const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
       );
 
       const token = response.data.token;
-
+      const accountType = response.data.user.accountType;
+      console.log(accountType);
       setEmail("");
       setPassword("");
-
+      setUserAccountType(accountType);
       setToken(token);
 
       onLogin(email);

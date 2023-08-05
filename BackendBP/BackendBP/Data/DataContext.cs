@@ -9,7 +9,9 @@ namespace BackendBP.Data
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticalPhoto> ArticalPhotos { get; set; }
+        public DbSet<Seller> Sell { get; set; }
         public DbSet<Order> Orders { get; set; }
+        
 
     }
 }

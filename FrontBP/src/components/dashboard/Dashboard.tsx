@@ -57,6 +57,14 @@ const Dashboard: React.FC = () => {
     navigate("/dashboard/AllOrders");
   };
 
+  const goToMyOrdersSeller = () => {
+    navigate("/dashboard/SellerOrders");
+  };
+
+  const goToMyOrdersBuyer = () => {
+    navigate("/dashboard/BuyerOrders");
+  };
+
   return (
     <div className={DashboardCSS.container}>
       {user ? (
@@ -105,6 +113,12 @@ const Dashboard: React.FC = () => {
               >
                 My Articles
               </button>
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={goToMyOrdersSeller}
+              >
+                My Orders
+              </button>
             </>
           )}
           {isKupac && (
@@ -114,6 +128,12 @@ const Dashboard: React.FC = () => {
                 onClick={goToShop}
               >
                 Shop
+              </button>
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={goToMyOrdersBuyer}
+              >
+                My orders
               </button>
             </>
           )}
