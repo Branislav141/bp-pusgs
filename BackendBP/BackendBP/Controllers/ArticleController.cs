@@ -58,9 +58,14 @@ namespace BackendBP.Controllers
             string userName = User.Identity.Name;
             var user = _userManager.FindByNameAsync(userName).Result;
 
+            // Check if an article with the same name already exists
+            if (_dbContext.Articles.Any(a => a.Name == artToAdd.Name && a.OrderId == null))
+            {
+                return Conflict("An article with the same name already exists.");
+            }
+
             Article article = new Article()
             {
-                
                 Name = artToAdd.Name,
                 Quantity = artToAdd.Quantity,
                 Description = artToAdd.Description,
@@ -105,6 +110,9 @@ namespace BackendBP.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditArticle(int id, [FromForm] ArticleEditDto editedArticleDto)
         {
+
+
+
             var article = await _dbContext.Articles
                             .Include(a => a.APhoto)
                             .FirstOrDefaultAsync(a => a.Id == id);
@@ -112,6 +120,11 @@ namespace BackendBP.Controllers
             if (article == null)
             {
                 return NotFound();
+            }
+
+            if (_dbContext.Articles.Any(a => a.Name == editedArticleDto.Name && a.OrderId == null && a.Id != id))
+            {
+                return Conflict("An article with the same name already exists.");
             }
 
             article.Name = editedArticleDto.Name;

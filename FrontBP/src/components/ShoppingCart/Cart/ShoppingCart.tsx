@@ -4,8 +4,10 @@ import { useShoppingCart } from "./ShoppingCartProvider";
 import ShopingCartCSS from "../Cart/ShoppingCart.module.css";
 import QuantityModal from "../Modal/QuantityModal";
 import { Article } from "../../../models/Article";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart: React.FC = () => {
+  const navigate = useNavigate();
   const { cartItems, removeFromCart } = useShoppingCart();
   const [selectedQuantities, setSelectedQuantities] = useState<{
     [itemId: number]: number;
@@ -61,6 +63,10 @@ const ShoppingCart: React.FC = () => {
     const quantity = quantities[item.id] || 1;
     return total + item.price * quantity;
   }, 0);
+
+  const goBack = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className={ShopingCartCSS["shopping-cart"]}>
@@ -129,6 +135,14 @@ const ShoppingCart: React.FC = () => {
         }}
       >
         Buy
+      </button>
+      <button
+        className={ShopingCartCSS["back-button"]}
+        onClick={() => {
+          goBack();
+        }}
+      >
+        Back
       </button>
       {isModalVisible && selectedArticle && (
         <QuantityModal

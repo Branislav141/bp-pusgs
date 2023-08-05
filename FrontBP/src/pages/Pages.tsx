@@ -16,6 +16,7 @@ import ShoppingCart from "../components/ShoppingCart/Cart/ShoppingCart";
 import AllOrders from "../components/Order/AllOrders";
 import SellerOrders from "../components/Order/SellerOrders/SellerOrders";
 import BuyerOrders from "../components/Order/BuyerOrders/BuyerOrders";
+import NewOrdersBuyer from "../components/Order/BuyerOrders/NewOrdersBuyer/NewOrdersBuyer";
 
 export default function Pages() {
   const [userEmail, setUserEmail] = useState<string>(() => {
@@ -57,6 +58,10 @@ export default function Pages() {
           <Route path="/dashboard/AllOrders" element={<AllOrders />} />
           <Route path="/dashboard/SellerOrders" element={<SellerOrders />} />
           <Route path="/dashboard/BuyerOrders" element={<BuyerOrders />} />
+          <Route
+            path="/dashboard/NewBuyerOrders"
+            element={<NewOrdersBuyer />}
+          />
         </Route>
       </Routes>
     </>

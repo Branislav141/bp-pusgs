@@ -26,6 +26,82 @@ public class OrderController : ControllerBase
         _userManager = userManager;
     }
 
+
+
+    [HttpDelete("CancelOrder/{orderId}")]
+    public IActionResult CancelOrder(int orderId)
+    {
+        try
+        {
+            var loggedInUserId = _userManager.GetUserId(User);
+            var buyer = _userManager.FindByIdAsync(loggedInUserId).Result;
+
+           
+            
+            var order = _dbContext.Orders.Include(o => o.Sellers).Include(o => o.Articles).FirstOrDefault(o => o.Id == orderId );
+
+
+            if (order == null)
+            {
+                return NotFound("Order not found or you don't have permission to cancel this order.");
+            }
+
+
+            foreach (var sell in order.Sellers)
+            {
+                _dbContext.Sell.Remove(sell);
+            }
+
+            foreach (var article in order.Articles)
+            {
+                var shopArticle = _dbContext.Articles.FirstOrDefault(a => a.Name == article.Name && a.OrderId == null);
+                if (shopArticle != null)
+                {
+                    shopArticle.Quantity = shopArticle.Quantity + article.Quantity;
+                }
+                _dbContext.Articles.Remove(article);
+            }
+
+            _dbContext.Orders.Remove(order);
+            _dbContext.SaveChanges();
+
+            return Ok("Order canceled successfully.");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while canceling order: " + ex.Message);
+        }
+    }
+
+
+
+    [HttpGet("GetNewOrdersByBuyer")]
+    public IActionResult GetOrders()
+    {
+        try
+        {
+            var loggedInUserId = _userManager.GetUserId(User);
+            var buyer = _userManager.FindByIdAsync(loggedInUserId).Result;
+
+            var currentTime = DateTime.Now; 
+            var oneHourAgo = currentTime.AddHours(-1);
+
+            var orders = _dbContext.Orders
+                .Where(order => order.Buyer == buyer.Email && order.OrderDate >= oneHourAgo)
+                .Include(o => o.Articles)
+                .ThenInclude(a => a.APhoto)
+                .ToList();
+
+
+            return Ok(orders);
+        }
+         catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while fetching orders: " + ex.Message);
+        }
+    }
+
+
     [HttpGet("GetOrdersByUserCreated")]
     public IActionResult GetOrdersByUserCreated()
     {
@@ -61,12 +137,15 @@ public class OrderController : ControllerBase
             var loggedInUserId = _userManager.GetUserId(User);
             var buyer = _userManager.FindByIdAsync(loggedInUserId).Result;
 
-            // Find orders where the Seller field contains the logged-in user's email and any of the articles are created by the seller
-            List<Order> orders = _dbContext.Orders
-                .Where(o => o.Buyer==buyer.Email)
+            var currentTime = DateTime.Now;
+            var oneHourAgo = currentTime.AddHours(-1);
+
+            var orders = _dbContext.Orders
+                .Where(order => order.Buyer == buyer.Email && order.OrderDate <= oneHourAgo)
                 .Include(o => o.Articles)
                 .ThenInclude(a => a.APhoto)
                 .ToList();
+
 
             return Ok(orders);
         }

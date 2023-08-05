@@ -46,7 +46,6 @@ const EditProfileForm: React.FC = () => {
   ) => {
     const { name, value } = event.target;
 
-    // Check if the input is the date field and convert its value to a Date object
     const parsedValue = name === "birthday" ? new Date(value) : value;
 
     setUser((prevUser) => ({
@@ -55,10 +54,10 @@ const EditProfileForm: React.FC = () => {
     }));
   };
 
-  const formatDate = (date: Date): string => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
+  const formatDate = (birthday: Date): string => {
+    const year = birthday.getFullYear();
+    const month = String(birthday.getMonth() + 1).padStart(2, "0");
+    const day = String(birthday.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 

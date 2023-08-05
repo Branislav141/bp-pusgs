@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  font-family: "Righteous", sans-serif;
+}
+
+.naslov {
+  display: flex;
+  justify-content: center;
+  font-family: "Righteous", sans-serif;
+  color: white;
+  font-size: 60px;
+}
+
+.order-container {
+  background-color: rgb(33, 44, 72);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 20px;
+  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
+
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 400px;
+  height: 500px;
+
+  overflow: hidden;
+}
+
+.order-container h2 {
+  font-family: "Righteous", sans-serif;
+  color: rgba(255, 255, 255, 0.98);
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  margin-top: 0;
+}
+
+.order-container .order-info {
+  height: 200px;
+  overflow: hidden;
+}
+
+.order-container p {
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 150%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.order-container .article-container {
+  margin-top: 18px;
+}
+
+.order-container .btn {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.order-container .btn + .btn {
+  margin-left: 10px;
+}
+
+.order-container img {
+  background-position: center;
+  background-size: cover;
+  height: 120px;
+  width: 100px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.255);
+}
+
+.order-container .article-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.order-container .article-container th,
+.order-container .article-container td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.order-container .article-container th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.order-container .article-container img {
+  max-width: 100%;
+}
+
+.order-container:hover {
+  height: auto;
+}
+
+.back-button {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.back-button:hover {
+  background-color: #cc0000;
+}

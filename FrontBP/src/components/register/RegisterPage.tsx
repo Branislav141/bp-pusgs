@@ -3,6 +3,7 @@ import axios from "axios";
 import RegisterPageCSS from "./RegisterPage.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 interface RegistrationModel {
   username: string;
@@ -10,13 +11,14 @@ interface RegistrationModel {
   password: string;
   name: string;
   surname: string;
-  dateOfBirth: string;
+  birthday: string;
   address: string;
   accountType: string;
   photoUrl: string | null;
 }
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formData, setFormData] = useState<RegistrationModel>({
     username: "",
@@ -24,7 +26,7 @@ function RegisterPage() {
     password: "",
     name: "",
     surname: "",
-    dateOfBirth: "",
+    birthday: "",
     address: "",
     accountType: "prodavac",
     photoUrl: null,
@@ -99,11 +101,13 @@ function RegisterPage() {
         password: "",
         name: "",
         surname: "",
-        dateOfBirth: "",
+        birthday: "",
         address: "",
         accountType: "prodavac",
         photoUrl: null,
       });
+
+      navigate("/login");
     } catch (error) {
       console.error("Registration error:", error);
       toast.error("Registration failed. Please try again.");
@@ -175,9 +179,9 @@ function RegisterPage() {
           type="date"
           className={RegisterPageCSS.date}
           placeholder="enter your date of birth"
-          id="dateOfBirth"
-          name="dateOfBirth"
-          value={formData.dateOfBirth}
+          id="birthday"
+          name="birthday"
+          value={formData.birthday}
           onChange={handleChange}
         />
 

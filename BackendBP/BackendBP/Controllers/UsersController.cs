@@ -83,12 +83,16 @@ namespace BackendBP.Controllers
                 return NotFound();
             }
 
+           
+
             user.UserName = updatedUser.UserName;
             user.Name = updatedUser.Name;
             user.Email = updatedUser.Email;
             user.Surname = updatedUser.Surname;
             user.Birthday = updatedUser.Birthday;
             user.Address = updatedUser.Address;
+
+
 
             if (imageFile != null)
             {

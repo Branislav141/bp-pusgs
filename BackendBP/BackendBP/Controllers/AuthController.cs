@@ -102,6 +102,8 @@ namespace BackendBP.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationModel registrationModel)
         {
+
+            
             BackendUser backendUser = new BackendUser()
             {
                 Email = registrationModel.Email,
@@ -113,7 +115,9 @@ namespace BackendBP.Controllers
                 Address = registrationModel.Address,
                 AccountType = registrationModel.AccountType,
                 AccountStatus = "Pending"
-            };
+
+
+    };
 
             if (!string.IsNullOrEmpty(registrationModel.PhotoUrl))
             {

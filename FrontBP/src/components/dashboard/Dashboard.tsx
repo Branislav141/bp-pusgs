@@ -34,6 +34,13 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const formatDate = (birthday: Date): string => {
+    const year = birthday.getFullYear();
+    const month = String(birthday.getMonth() + 1).padStart(2, "0");
+    const day = String(birthday.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const goToUserList = () => {
     navigate("/dashboard/userList");
   };
@@ -61,8 +68,11 @@ const Dashboard: React.FC = () => {
     navigate("/dashboard/SellerOrders");
   };
 
-  const goToMyOrdersBuyer = () => {
+  const goToMyOldOrdersBuyer = () => {
     navigate("/dashboard/BuyerOrders");
+  };
+  const goToMyNewOrdersBuyer = () => {
+    navigate("/dashboard/NewBuyerOrders");
   };
 
   return (
@@ -74,7 +84,7 @@ const Dashboard: React.FC = () => {
           <p>Email: {user.email}</p>
           <p>Username: {user.userName}</p>
           <p>Surname: {user.surname}</p>
-          <p>Birthday: {user.birthday.toDateString()}</p>
+          <p>Birthday: {formatDate(user.birthday)}</p>
           <p>Address: {user.address}</p>
           {user.photoUser ? (
             <div className={DashboardCSS["user-photo"]}>
@@ -131,9 +141,16 @@ const Dashboard: React.FC = () => {
               </button>
               <button
                 className={DashboardCSS["prodavac-button"]}
-                onClick={goToMyOrdersBuyer}
+                onClick={goToMyOldOrdersBuyer}
               >
-                My orders
+                Old orders
+              </button>
+
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={goToMyNewOrdersBuyer}
+              >
+                New orders
               </button>
             </>
           )}
