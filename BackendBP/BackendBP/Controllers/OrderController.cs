@@ -27,7 +27,7 @@ public class OrderController : ControllerBase
     }
 
 
-
+    [Authorize(Roles = "kupac")]
     [HttpDelete("CancelOrder/{orderId}")]
     public IActionResult CancelOrder(int orderId)
     {
@@ -74,7 +74,7 @@ public class OrderController : ControllerBase
     }
 
 
-
+    [Authorize(Roles = "kupac")]
     [HttpGet("GetNewOrdersByBuyer")]
     public IActionResult GetOrders()
     {
@@ -101,7 +101,7 @@ public class OrderController : ControllerBase
         }
     }
 
-
+    [Authorize(Roles = "prodavac")]
     [HttpGet("GetOrdersByUserCreated")]
     public IActionResult GetOrdersByUserCreated()
     {
@@ -128,7 +128,7 @@ public class OrderController : ControllerBase
 
 
 
-
+    [Authorize(Roles = "kupac")]
     [HttpGet("GetOrdersByBuyer")]
     public IActionResult GetOrdersByBuyer()
     {
@@ -158,7 +158,7 @@ public class OrderController : ControllerBase
 
 
 
-
+    [Authorize(Roles = "administrator")]
     [HttpGet("GetAllOrders")]
     public IActionResult GetAllOrders()
     {
@@ -170,6 +170,7 @@ public class OrderController : ControllerBase
         return Ok(orders);
     }
 
+    [Authorize(Roles = "kupac")]
     [HttpPost]
     public async Task<IActionResult> CreateOrder([FromBody] OrderToAdd inputModel)
     {

@@ -17,8 +17,11 @@ import AllOrders from "../components/Order/AllOrders";
 import SellerOrders from "../components/Order/SellerOrders/SellerOrders";
 import BuyerOrders from "../components/Order/BuyerOrders/BuyerOrders";
 import NewOrdersBuyer from "../components/Order/BuyerOrders/NewOrdersBuyer/NewOrdersBuyer";
+import { useTokenStore } from "../store/useTokenStore";
 
 export default function Pages() {
+  const accountType = useTokenStore((state) => state.accountType);
+
   const [userEmail, setUserEmail] = useState<string>(() => {
     return localStorage.getItem("userEmail") || "";
   });
@@ -43,25 +46,45 @@ export default function Pages() {
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/edit-profile" element={<EditProfileForm />} />
-          <Route path="/dashboard/userList" element={<UserList />} />
-          <Route path="/dashboard/addArticle" element={<AddArticle />} />
-          <Route
-            path="/dashboard/myArticles"
-            element={<GetMyArticles userEmail={userEmail} />}
-          />
-          <Route
-            path="/dashboard/myArticles/editArticle/:articleId"
-            element={<EditArticle />}
-          />
-          <Route path="/dashboard/Shop" element={<AllArticles />} />{" "}
-          <Route path="/dashboard/shoppingCart" element={<ShoppingCart />} />
-          <Route path="/dashboard/AllOrders" element={<AllOrders />} />
-          <Route path="/dashboard/SellerOrders" element={<SellerOrders />} />
-          <Route path="/dashboard/BuyerOrders" element={<BuyerOrders />} />
-          <Route
-            path="/dashboard/NewBuyerOrders"
-            element={<NewOrdersBuyer />}
-          />
+          {accountType === "administrator" && (
+            <>
+              <Route path="/dashboard/userList" element={<UserList />} />
+              <Route path="/dashboard/AllOrders" element={<AllOrders />} />
+            </>
+          )}
+
+          {accountType === "kupac" && (
+            <>
+              <Route path="/dashboard/Shop" element={<AllArticles />} />{" "}
+              <Route
+                path="/dashboard/shoppingCart"
+                element={<ShoppingCart />}
+              />
+              <Route path="/dashboard/BuyerOrders" element={<BuyerOrders />} />
+              <Route
+                path="/dashboard/NewBuyerOrders"
+                element={<NewOrdersBuyer />}
+              />
+            </>
+          )}
+
+          {accountType === "prodavac" && (
+            <>
+              <Route
+                path="/dashboard/SellerOrders"
+                element={<SellerOrders />}
+              />
+              <Route path="/dashboard/addArticle" element={<AddArticle />} />
+              <Route
+                path="/dashboard/myArticles"
+                element={<GetMyArticles userEmail={userEmail} />}
+              />
+              <Route
+                path="/dashboard/myArticles/editArticle/:articleId"
+                element={<EditArticle />}
+              />
+            </>
+          )}
         </Route>
       </Routes>
     </>

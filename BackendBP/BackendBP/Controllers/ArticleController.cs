@@ -31,6 +31,7 @@ namespace BackendBP.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = "kupac")]
         [HttpGet]
         public IActionResult GetArticles()
         {
@@ -41,6 +42,7 @@ namespace BackendBP.Controllers
             return Ok(articles);
         }
 
+        [Authorize(Roles = "prodavac")]
         [HttpGet("my/{email}")]
         public IActionResult GetAllArticles(string email)
         {
@@ -52,6 +54,7 @@ namespace BackendBP.Controllers
             return Ok(articles);
         }
 
+        [Authorize(Roles = "prodavac")]
         [HttpPost("AddArticle")]
         public IActionResult AddArticle([FromBody] ArticlesToAdd artToAdd)
         {
@@ -83,6 +86,7 @@ namespace BackendBP.Controllers
             return Ok("Add article succeeded");
         }
 
+        [Authorize(Roles = "prodavac")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetArticle(int id)
         {
@@ -107,6 +111,7 @@ namespace BackendBP.Controllers
             return Ok(art);
         }
 
+        [Authorize(Roles = "prodavac")]
         [HttpPut("{id}")]
         public async Task<IActionResult> EditArticle(int id, [FromForm] ArticleEditDto editedArticleDto)
         {
@@ -157,7 +162,7 @@ namespace BackendBP.Controllers
         }
 
 
-
+        [Authorize(Roles = "prodavac")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteArticle(int id)
         {
@@ -180,7 +185,7 @@ namespace BackendBP.Controllers
             return Ok("Article and associated photo deleted successfully!");
         }
 
-
+        [Authorize(Roles = "prodavac")]
         [HttpPost("uploadPhoto")]
         public async Task<string> UploadPhoto(IFormFile file)
         {

@@ -174,3 +174,4 @@ C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.pdb
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.genruntimeconfig.cache
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\ref\BackendBP.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll

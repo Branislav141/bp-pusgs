@@ -20,6 +20,7 @@ namespace BackendBP.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+
     public class UsersController : ControllerBase
     {
         private readonly UserManager<BackendUser> _userManager;
@@ -32,7 +33,7 @@ namespace BackendBP.Controllers
             _dbContext = dbContext;
             _emailSender = emailSender;
         }
-
+        [Authorize(Roles ="administrator")]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -41,6 +42,7 @@ namespace BackendBP.Controllers
             return Ok(users);
         }
 
+        
         [HttpGet("user")]
         public async Task<IActionResult> GetUser()
         {
@@ -144,7 +146,7 @@ namespace BackendBP.Controllers
 
 
 
-
+        [Authorize(Roles ="administrator")]
         [HttpPost("approve")]
         public async Task<IActionResult> ApproveUser([FromBody] ApproveDeclineModel model)
         {
@@ -159,7 +161,7 @@ namespace BackendBP.Controllers
 
             return Ok();
         }
-
+        [Authorize(Roles = "administrator")]
         [HttpPost("decline")]
         public async Task<IActionResult> DeclineUser([FromBody] ApproveDeclineModel model)
         {

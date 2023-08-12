@@ -118,3 +118,10 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.LoginGoogle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}

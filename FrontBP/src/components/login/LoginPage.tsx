@@ -5,6 +5,8 @@ import axios from "axios";
 import { setToken, setUserAccountType } from "../../store/useTokenStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
 
 const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
   onLogin,
@@ -13,6 +15,31 @@ const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
   const [password, setPassword] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
+
+  const sendGoogleTokenToServer = async (token: string) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/Auth/login-with-google",
+        { token },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setEmail("");
+      const tokenn = response.data.token;
+      const accountType = response.data.user.accountType;
+      const email = response.data.user.email;
+      setUserAccountType(accountType);
+      setToken(tokenn);
+      onLogin(email);
+      // Ovde možete dalje obraditi odgovor sa servera
+    } catch (error) {
+      console.error("Failed to log in with Google", error);
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,8 +108,17 @@ const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
 
         <div className={LoginPageCSS.or}>Or sign with:</div>
         <br />
-        <div>
-          <button className={LoginPageCSS.faceicon}></button>
+        <div className={LoginPageCSS["LoginGoogle"]}>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              if (credentialResponse.credential) {
+                sendGoogleTokenToServer(credentialResponse.credential);
+              }
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
         </div>
 
         <hr></hr>

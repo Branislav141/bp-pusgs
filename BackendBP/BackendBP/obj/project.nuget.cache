@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "qakcJr7nHpusgApn3BEx7V1uOkg5tMxOM3v7Q0c6gJIW9aenAUWNewmMbnSPFnJvl1WK6bDo126JkK36f3Bgwg==",
+  "dgSpecHash": "pIyVnZ4qBUc5LtxAxOnNpJwKbs2KpQyh0CmO4LQMkkyg20fPMYJt4AgPssv5dCsv9lxTRScsPc352OYBGgcPFw==",
   "success": true,
   "projectFilePath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\BackendBP\\BackendBP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BP Doktor\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\BP Doktor\\.nuget\\packages\\mailkit\\2.6.0\\mailkit.2.6.0.nupkg.sha512",
+    "C:\\Users\\BP Doktor\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.17\\microsoft.aspnetcore.authentication.google.5.0.17.nupkg.sha512",
     "C:\\Users\\BP Doktor\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",
     "C:\\Users\\BP Doktor\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.17\\microsoft.aspnetcore.cryptography.internal.5.0.17.nupkg.sha512",
     "C:\\Users\\BP Doktor\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.17\\microsoft.aspnetcore.cryptography.keyderivation.5.0.17.nupkg.sha512",
