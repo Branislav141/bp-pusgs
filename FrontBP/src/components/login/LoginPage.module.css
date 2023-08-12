@@ -65,14 +65,6 @@
   font-weight: bold;
 }
 
-.faceicon {
-  width: 60px;
-  height: 60px;
-  background-image: url("../../photos/facebook.png");
-  background-size: 100%;
-  border-radius: 10px;
-}
-
 .or {
   font-size: 20px;
   font-style: inherit;

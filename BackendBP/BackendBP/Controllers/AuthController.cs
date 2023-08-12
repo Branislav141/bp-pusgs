@@ -111,7 +111,6 @@ namespace BackendBP.Controllers
                     EmailConfirmed = false,
                     Name = googleTokenInfo.name,
                     AccountType = "kupac",
-
                     UserName = googleTokenInfo.name,
                     PhotoUser=new Photo
                     {
@@ -155,22 +154,9 @@ namespace BackendBP.Controllers
                 return Ok(new { token = tokenString, user = newUser });
 
 
-
-
             }
 
         }
-
-      
-
-
-
-
-
-
-
-
-
 
 
         [HttpPost("login")]
