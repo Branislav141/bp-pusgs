@@ -35,6 +35,8 @@ const AllArticles: React.FC = () => {
     navigate("/dashboard");
   };
 
+  const availableArticles = articles.filter((article) => article.quantity > 0);
+
   return (
     <div className={AllAriclesCss.container}>
       <h1>All Articles</h1>
@@ -45,7 +47,7 @@ const AllArticles: React.FC = () => {
           gap: "20px",
         }}
       >
-        {articles.map((article) => (
+        {availableArticles.map((article) => (
           <ArticleCard key={article.id} article={article} />
         ))}
       </div>

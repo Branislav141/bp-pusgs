@@ -27,6 +27,7 @@ public class OrderController : ControllerBase
     }
 
 
+
     [Authorize(Roles = "kupac")]
     [HttpDelete("CancelOrder/{orderId}")]
     public IActionResult CancelOrder(int orderId)
@@ -226,18 +227,17 @@ public class OrderController : ControllerBase
 
             var sellerEmails = orderArticles.Select(article => article.UserCreated).Distinct().ToList();
 
-            // Retrieve the list of sellers from the database based on their emails
+           
             var existingSellers = await _dbContext.Sell.Where(s => sellerEmails.Contains(s.Email)).ToListAsync();
 
-            // Check for new sellers (emails that are not already in the database)
+         
             var newSellerEmails = sellerEmails.Except(existingSellers.Select(s => s.Email)).ToList();
 
-            // Create and add new sellers to the database
             foreach (var newSellerEmail in newSellerEmails)
             {
                 var newSeller = new Seller { Email = newSellerEmail };
                 _dbContext.Sell.Add(newSeller);
-                existingSellers.Add(newSeller); // Add the new seller to the existingSellers list for use in the order creation
+                existingSellers.Add(newSeller); 
             }
 
 
@@ -259,7 +259,7 @@ public class OrderController : ControllerBase
             foreach (var item in inputModel.Quantities)
             {
                 var article = await _dbContext.Articles.FindAsync(item.Key);
-                if (article != null)
+                if (article != null && article.Quantity>0)
                 {
                     article.Quantity -= item.Value;
                 }

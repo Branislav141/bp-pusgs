@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QuantityModalCSS from "../Modal/QuantityModal.module.css";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import { Article } from "../../../models/Article";
 import { useTokenStore } from "../../../store/useTokenStore";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 interface QuantityModalProps {
   total: number;
@@ -30,6 +31,7 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
   const [comment, setComment] = useState<string>("");
   const token = useTokenStore((state) => state.token);
   const navigate = useNavigate();
+  const [orderId, setOrderId] = useState<string | null>(null);
 
   const handleConfirm = async () => {
     if (deliveryAddress.trim() === "") {
@@ -82,6 +84,62 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
     setIsAddressEmpty(false);
   };
   const totalwithdelivery = total + 5;
+
+  async function createOrder(data: any, actions: any): Promise<string> {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/PayPal/CreateOrderByPayPal",
+        {
+          Quantities: quantities,
+          cartItems,
+          DeliveryAddress: deliveryAddress,
+          TotalPrice: total,
+          Comment: comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const orderId = response.data.orderId;
+      console.log(orderId);
+      setOrderId(orderId);
+      return response.data.orderId;
+    } catch (error) {
+      console.error("Error creating order:", error);
+      throw error;
+    }
+  }
+
+  async function onApprove(data: any, actions: any): Promise<void> {
+    try {
+      await axios.post(
+        "http://localhost:5000/api/PayPal/ApproveOrderByPayPal",
+        {
+          orderId: data.orderID, // Promenio sam "data" umesto "data"
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      cartItems.forEach((item) => {
+        removeFromCart(item.id);
+      });
+      navigate("/dashboard");
+      onClose();
+    } catch (error) {
+      console.error("Error approving PayPal payment:", error);
+      // Handle payment error here, e.g., display an error message to the user
+    }
+  }
+
   return (
     <div className={QuantityModalCSS["modal-container"]}>
       <div className={QuantityModalCSS["modal-content"]}>
@@ -106,12 +164,15 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
             className={QuantityModalCSS["comment-textarea"]}
           />
         </div>
+        <div>
+          <PayPalButtons createOrder={createOrder} onApprove={onApprove} />
+        </div>
         <div className={QuantityModalCSS["button-container"]}>
           <button
             onClick={handleConfirm}
             className={`${QuantityModalCSS["modal-button"]} ${QuantityModalCSS["confirm-button"]}`}
           >
-            Buy
+            buy(cash on delivery)
           </button>
           <button
             onClick={onClose}
@@ -124,5 +185,4 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
     </div>
   );
 };
-
 export default QuantityModal;

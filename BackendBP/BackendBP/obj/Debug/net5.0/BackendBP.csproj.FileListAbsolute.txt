@@ -1,12 +1,3 @@
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.csproj.AssemblyReference.cache
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.AssemblyInfoInputs.cache
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.AssemblyInfo.cs
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.csproj.CoreCompileInputs.cache
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.RazorAssemblyInfo.cache
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.RazorAssemblyInfo.cs
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\appsettings.json
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\BackendBP.StaticWebAssets.xml
@@ -18,8 +9,10 @@ C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\BackendBP.pdb
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\BackendBP.Views.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\BackendBP.Views.pdb
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\BraintreeHttp-Dotnet.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Humanizer.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\MailKit.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -60,6 +53,10 @@ C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\MimeKit.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\NETCore.MailKit.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\PayPal.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\PayPalCheckoutSdk.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\PayPalCoreSDK.dll
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\PayPalHttp-Dotnet.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\BouncyCastle.Crypto.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\System.Composition.AttributedModel.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\System.Composition.Convention.dll
@@ -139,6 +136,15 @@ C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\EmailService.dll
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\EmailService.pdb
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.csproj.AssemblyReference.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.AssemblyInfoInputs.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.AssemblyInfo.cs
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.csproj.CoreCompileInputs.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.RazorAssemblyInfo.cache
+C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.RazorAssemblyInfo.cs
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\scopedcss\bundle\BackendBP.styles.css
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\staticwebassets\BackendBP.StaticWebAssets.Manifest.cache
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\staticwebassets\BackendBP.StaticWebAssets.Pack.cache
@@ -174,4 +180,3 @@ C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.pdb
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\BackendBP.genruntimeconfig.cache
 C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\obj\Debug\net5.0\ref\BackendBP.dll
-C:\Users\BP Doktor\Documents\GitHub\bp-pusgs\BackendBP\BackendBP\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll

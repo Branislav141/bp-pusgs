@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using PayPalCheckoutSdk.Core;
 
 namespace BackendBP
 {
@@ -94,23 +95,21 @@ namespace BackendBP
 
             services.AddScoped<IEmailSender, EmailSender>();
 
+            services.AddDistributedMemoryCache(); 
+
+         
 
 
-            services.AddControllers().AddJsonOptions(options =>
+        services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
 
 
-
-
-
-
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+       
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -120,9 +119,8 @@ namespace BackendBP
 
             app.UseHttpsRedirection();
 
-
-
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+          
 
             app.UseRouting();
             app.UseAuthentication();
