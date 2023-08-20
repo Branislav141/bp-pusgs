@@ -110,20 +110,14 @@ namespace BackendBP.Controllers
 
 
                 var sellerEmails = orderArticles.Select(article => article.UserCreated).Distinct().ToList();
+                var novi = new List<Seller>();
 
-           
-                var existingSellers = await _dbContext.Sell.Where(s => sellerEmails.Contains(s.Email)).ToListAsync();
-
-             
-                var newSellerEmails = sellerEmails.Except(existingSellers.Select(s => s.Email)).ToList();
-
-                foreach (var newSellerEmail in newSellerEmails)
+                foreach (var newSellerEmail in sellerEmails)
                 {
                     var newSeller = new Seller { Email = newSellerEmail };
+                    novi.Add(newSeller);
                     _dbContext.Sell.Add(newSeller);
-                    existingSellers.Add(newSeller); 
                 }
-
 
                 var order = new Models.Order
                 {
@@ -134,8 +128,10 @@ namespace BackendBP.Controllers
                     OrderDate = currentDateTime,
                     DeliveryDate = deliveryDate,
                     Buyer = buyerEmail,
-                    Sellers = existingSellers
+                    Sellers = novi,
+                    OrdersStatus = "Pending"
                 };
+
                 _dbContext.Orders.Add(order);
 
                 foreach (var item in inputModel.Quantities)

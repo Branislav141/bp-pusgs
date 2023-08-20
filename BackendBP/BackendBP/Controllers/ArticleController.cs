@@ -61,7 +61,7 @@ namespace BackendBP.Controllers
             string userName = User.Identity.Name;
             var user = _userManager.FindByNameAsync(userName).Result;
 
-            // Check if an article with the same name already exists
+          
             if (_dbContext.Articles.Any(a => a.Name == artToAdd.Name && a.OrderId == null))
             {
                 return Conflict("An article with the same name already exists.");

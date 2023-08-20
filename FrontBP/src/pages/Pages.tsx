@@ -19,6 +19,8 @@ import BuyerOrders from "../components/Order/BuyerOrders/BuyerOrders";
 import NewOrdersBuyer from "../components/Order/BuyerOrders/NewOrdersBuyer/NewOrdersBuyer";
 import { useTokenStore } from "../store/useTokenStore";
 
+import SellerOrdersStatusPending from "../components/Order/SellerOrders/SellerOrdersOnPending/SellerOrdersOnPending";
+
 export default function Pages() {
   const accountType = useTokenStore((state) => state.accountType);
 
@@ -46,6 +48,7 @@ export default function Pages() {
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/edit-profile" element={<EditProfileForm />} />
+
           {accountType === "administrator" && (
             <>
               <Route path="/dashboard/userList" element={<UserList />} />
@@ -74,6 +77,11 @@ export default function Pages() {
                 path="/dashboard/SellerOrders"
                 element={<SellerOrders />}
               />
+              <Route
+                path="/dashboard/SellerOrdersStatusPending"
+                element={<SellerOrdersStatusPending />}
+              />
+
               <Route path="/dashboard/addArticle" element={<AddArticle />} />
               <Route
                 path="/dashboard/myArticles"

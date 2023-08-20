@@ -69,6 +69,8 @@ const SellerOrdersTable: React.FC = () => {
               </p>
               <p>Delivery Address: {order.deliveryAddress}</p>
               <p>Delivery Date: {order.deliveryDate}</p>
+              <br />
+              <p>STATUS:{order.ordersStatus}</p>
 
               <div className={SellerOrdersCSS["article-container"]}>
                 <h3>Articles:</h3>

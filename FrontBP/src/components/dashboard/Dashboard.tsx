@@ -69,6 +69,10 @@ const Dashboard: React.FC = () => {
     navigate("/dashboard/SellerOrders");
   };
 
+  const SellerOrdersStatusPending = () => {
+    navigate("/dashboard/SellerOrdersStatusPending");
+  };
+
   const goToMyOldOrdersBuyer = () => {
     navigate("/dashboard/BuyerOrders");
   };
@@ -129,6 +133,13 @@ const Dashboard: React.FC = () => {
                 onClick={goToMyOrdersSeller}
               >
                 My Orders
+              </button>
+
+              <button
+                className={DashboardCSS["prodavac-button"]}
+                onClick={SellerOrdersStatusPending}
+              >
+                My Orders on pending
               </button>
             </>
           )}

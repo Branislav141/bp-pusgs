@@ -75,6 +75,43 @@ public class OrderController : ControllerBase
     }
 
 
+
+
+    [Authorize(Roles = "prodavac")]
+    [HttpPut("UpdateOrderStatus/{orderId}")]
+    public IActionResult UpdateOrderStatuss(int orderId, [FromBody] UpdateOrderStatusModel model)
+    {
+        try
+        {
+            var loggedInUserId = _userManager.GetUserId(User);
+            var buyer = _userManager.FindByIdAsync(loggedInUserId).Result;
+
+
+
+            var order = _dbContext.Orders.Include(o => o.Sellers).Include(o => o.Articles).FirstOrDefault(o => o.Id == orderId);
+
+
+            if (order == null)
+            {
+                return NotFound("Order not found.");
+            }
+
+
+            order.OrdersStatus = model.status;
+            _dbContext.SaveChanges();
+
+            return Ok("Order Status updated successfully.");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while update order status: " + ex.Message);
+        }
+    }
+
+
+
+
+
     [Authorize(Roles = "kupac")]
     [HttpGet("GetNewOrdersByBuyer")]
     public IActionResult GetOrders()
@@ -125,6 +162,32 @@ public class OrderController : ControllerBase
             return StatusCode(500, "An error occurred while fetching orders: " + ex.Message);
         }
     }
+
+
+    [Authorize(Roles = "prodavac")]
+    [HttpGet("GetOrdersByUserCreatedAndStatusPending")]
+    public IActionResult GetOrdersByUserCreatedAndStatusPending()
+    {
+        try
+        {
+            var loggedInUserId = _userManager.GetUserId(User);
+            var seller = _userManager.FindByIdAsync(loggedInUserId).Result;
+
+
+            List<Order> orders = _dbContext.Orders
+                 .Where(o => o.Sellers.Any(s => s.Email == seller.Email && o.OrdersStatus=="Pending"))
+                 .Include(o => o.Articles)
+                 .ThenInclude(a => a.APhoto)
+                 .ToList();
+
+            return Ok(orders);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while fetching orders: " + ex.Message);
+        }
+    }
+
 
 
 
@@ -226,20 +289,14 @@ public class OrderController : ControllerBase
 
 
             var sellerEmails = orderArticles.Select(article => article.UserCreated).Distinct().ToList();
+            var novi = new List<Seller>();
 
-           
-            var existingSellers = await _dbContext.Sell.Where(s => sellerEmails.Contains(s.Email)).ToListAsync();
-
-         
-            var newSellerEmails = sellerEmails.Except(existingSellers.Select(s => s.Email)).ToList();
-
-            foreach (var newSellerEmail in newSellerEmails)
+            foreach (var newSellerEmail in sellerEmails)
             {
                 var newSeller = new Seller { Email = newSellerEmail };
+                novi.Add(newSeller);
                 _dbContext.Sell.Add(newSeller);
-                existingSellers.Add(newSeller); 
             }
-
 
             var order = new Order
             {
@@ -250,7 +307,8 @@ public class OrderController : ControllerBase
                 OrderDate = currentDateTime,
                 DeliveryDate = deliveryDate,
                 Buyer= buyerEmail,
-                Sellers = existingSellers
+                Sellers = novi,
+                OrdersStatus = "Pending"
             };
 
 

@@ -6,6 +6,7 @@ export interface Order {
   totalPrice: number;
   comment: string;
   orderDate: string;
+  ordersStatus: string;
   deliveryDate?: string | null;
   deliveryAddress: string;
 }
