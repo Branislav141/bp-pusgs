@@ -158,7 +158,10 @@ const SellerOrdersStatusPending: React.FC = () => {
                 </tbody>
               </table>
               <br />
-              <button onClick={() => handleSetProcessingStatus(order.id)}>
+              <button
+                className={SellerOrdersCSS["pending-button"]}
+                onClick={() => handleSetProcessingStatus(order.id)}
+              >
                 Set Processing
               </button>
             </div>

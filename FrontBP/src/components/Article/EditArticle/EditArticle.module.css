@@ -71,3 +71,20 @@
   height: 120px;
   object-fit: cover;
 }
+
+.save-button {
+  background-color: blue;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.save-button:hover {
+  background-color: lightblue;
+}

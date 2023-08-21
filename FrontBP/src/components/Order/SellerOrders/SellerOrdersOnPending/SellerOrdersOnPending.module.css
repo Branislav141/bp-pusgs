@@ -138,3 +138,20 @@
   color: white;
   font-weight: bold;
 }
+
+.pending-button {
+  background-color: green;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.pending-button:hover {
+  background-color: lawngreen;
+}

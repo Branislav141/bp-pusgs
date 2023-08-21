@@ -32,14 +32,13 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
   const token = useTokenStore((state) => state.token);
   const navigate = useNavigate();
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [isAddressEntered, setIsAddressEntered] = useState(false);
 
   const handleConfirm = async () => {
     if (deliveryAddress.trim() === "") {
       setIsAddressEmpty(true);
       return;
     }
-
-    console.log(quantities);
 
     try {
       const response = await axios.post(
@@ -80,9 +79,12 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
   const handleDeliveryAddressChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setDeliveryAddress(event.target.value);
+    const newAddress = event.target.value;
+    setDeliveryAddress(newAddress);
+    setIsAddressEntered(newAddress.trim() !== "");
     setIsAddressEmpty(false);
   };
+
   const totalwithdelivery = total + 5;
 
   async function createOrder(data: any, actions: any): Promise<string> {
@@ -119,7 +121,7 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
       await axios.post(
         "http://localhost:5000/api/PayPal/ApproveOrderByPayPal",
         {
-          orderId: data.orderID, // Promenio sam "data" umesto "data"
+          orderId: data.orderID,
         },
         {
           headers: {
@@ -136,7 +138,6 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
       onClose();
     } catch (error) {
       console.error("Error approving PayPal payment:", error);
-      // Handle payment error here, e.g., display an error message to the user
     }
   }
 
@@ -165,20 +166,24 @@ const QuantityModal: React.FC<QuantityModalProps> = ({
           />
         </div>
         <div>
-          <PayPalButtons createOrder={createOrder} onApprove={onApprove} />
+          <PayPalButtons
+            createOrder={createOrder}
+            onApprove={onApprove}
+            disabled={!isAddressEntered}
+          />
         </div>
         <div className={QuantityModalCSS["button-container"]}>
           <button
             onClick={handleConfirm}
             className={`${QuantityModalCSS["modal-button"]} ${QuantityModalCSS["confirm-button"]}`}
           >
-            buy(cash on delivery)
+            BUY(CASH ON DELIVERY)
           </button>
           <button
             onClick={onClose}
             className={`${QuantityModalCSS["modal-button"]} ${QuantityModalCSS["cancel-button"]}`}
           >
-            Cancel
+            CANCEL
           </button>
         </div>
       </div>

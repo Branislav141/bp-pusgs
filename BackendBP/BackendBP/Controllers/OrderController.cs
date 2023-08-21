@@ -39,7 +39,7 @@ public class OrderController : ControllerBase
 
            
             
-            var order = _dbContext.Orders.Include(o => o.Sellers).Include(o => o.Articles).FirstOrDefault(o => o.Id == orderId );
+            var order = _dbContext.Orders.Include(o => o.Sellers).Include(o => o.Articles).AsSplitQuery().FirstOrDefault(o => o.Id == orderId );
 
 
             if (order == null)
@@ -88,7 +88,7 @@ public class OrderController : ControllerBase
 
 
 
-            var order = _dbContext.Orders.Include(o => o.Sellers).Include(o => o.Articles).FirstOrDefault(o => o.Id == orderId);
+            var order = _dbContext.Orders.Include(o => o.Sellers).Include(o => o.Articles).AsSplitQuery().FirstOrDefault(o => o.Id == orderId);
 
 
             if (order == null)

@@ -5,6 +5,7 @@ export interface User {
   name: string;
   surname: string;
   birthday: Date;
+  passwordConfirmed: boolean;
   address: string;
   accountType: string;
   accountStatus: string;

@@ -110,7 +110,8 @@
   height: auto;
 }
 
-.back-button {
+.back-button,
+.cancel-button {
   background-color: #ff0000;
   color: #fff;
   border: none;
@@ -124,5 +125,8 @@
 }
 
 .back-button:hover {
+  background-color: #cc0000;
+}
+.cancel-button:hover {
   background-color: #cc0000;
 }

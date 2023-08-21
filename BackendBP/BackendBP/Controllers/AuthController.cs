@@ -108,7 +108,7 @@ namespace BackendBP.Controllers
                 var newUser = new BackendUser
                 {
                     Email = googleTokenInfo.email,
-                    EmailConfirmed = false,
+                    EmailConfirmed = true,
                     Name = googleTokenInfo.name,
                     AccountType = "kupac",
                     UserName = googleTokenInfo.name,
@@ -228,7 +228,7 @@ namespace BackendBP.Controllers
             {
                 Email = registrationModel.Email,
                 UserName = registrationModel.UserName,
-                EmailConfirmed = false,
+                EmailConfirmed = true,
                 Name = registrationModel.Name,
                 Surname = registrationModel.Surname,
                 Birthday = registrationModel.Birthday,

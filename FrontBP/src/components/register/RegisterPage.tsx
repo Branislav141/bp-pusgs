@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import RegisterPageCSS from "./RegisterPage.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+
+import RegisterPageCSS from "./RegisterPage.module.css";
 
 interface RegistrationModel {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
   name: string;
   surname: string;
   birthday: string;
@@ -18,12 +20,15 @@ interface RegistrationModel {
 }
 
 function RegisterPage() {
+  const [passwordTooShort, setPasswordTooShort] = useState(false);
+
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formData, setFormData] = useState<RegistrationModel>({
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
     name: "",
     surname: "",
     birthday: "",
@@ -39,7 +44,9 @@ function RegisterPage() {
   }
 
   function handleChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) {
     const { name, value } = event.target;
 
@@ -47,6 +54,18 @@ function RegisterPage() {
       setFormData({ ...formData, accountType: "kupac" });
     } else {
       setFormData({ ...formData, [name]: value });
+    }
+
+    if (name === "password" || name === "confirmPassword") {
+      if (formData.password !== formData.confirmPassword) {
+        console.log("Passwords do not match");
+      }
+
+      if (name === "password" && value.length < 5) {
+        setPasswordTooShort(true);
+      } else {
+        setPasswordTooShort(false);
+      }
     }
   }
 
@@ -81,6 +100,11 @@ function RegisterPage() {
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/Auth/register",
@@ -99,6 +123,7 @@ function RegisterPage() {
         username: "",
         email: "",
         password: "",
+        confirmPassword: "",
         name: "",
         surname: "",
         birthday: "",
@@ -116,14 +141,13 @@ function RegisterPage() {
 
   return (
     <div>
+      <h1 className={RegisterPageCSS["naslov"]}>Register page</h1>
       <form className={RegisterPageCSS.RegisterForm} onSubmit={handleSubmit}>
-        <br />
-
         <label>Username</label>
         <input
           type="text"
           className={RegisterPageCSS.username}
-          placeholder="enter your username"
+          placeholder="Enter your username"
           id="username"
           name="username"
           value={formData.username}
@@ -134,7 +158,7 @@ function RegisterPage() {
         <input
           type="email"
           className={RegisterPageCSS.email}
-          placeholder="enter your email"
+          placeholder="Enter your email"
           id="email"
           name="email"
           value={formData.email}
@@ -145,10 +169,27 @@ function RegisterPage() {
         <input
           className={RegisterPageCSS.password}
           type="password"
-          placeholder="enter your password"
+          placeholder="Enter your password"
           id="password"
           name="password"
           value={formData.password}
+          onChange={handleChange}
+        />
+
+        {passwordTooShort && (
+          <p className={RegisterPageCSS.passwordError}>
+            Password must be at least 5 characters long.
+          </p>
+        )}
+
+        <label>Confirm Password</label>
+        <input
+          className={RegisterPageCSS.confirmPassword}
+          type="password"
+          placeholder="Confirm your password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={formData.confirmPassword}
           onChange={handleChange}
         />
 
@@ -156,7 +197,7 @@ function RegisterPage() {
         <input
           type="text"
           className={RegisterPageCSS.name}
-          placeholder="enter your name"
+          placeholder="Enter your name"
           id="name"
           name="name"
           value={formData.name}
@@ -167,7 +208,7 @@ function RegisterPage() {
         <input
           type="text"
           className={RegisterPageCSS.surname}
-          placeholder="enter your surname"
+          placeholder="Enter your surname"
           id="surname"
           name="surname"
           value={formData.surname}
@@ -178,7 +219,7 @@ function RegisterPage() {
         <input
           type="date"
           className={RegisterPageCSS.date}
-          placeholder="enter your date of birth"
+          placeholder="Enter your date of birth"
           id="birthday"
           name="birthday"
           value={formData.birthday}
@@ -189,7 +230,7 @@ function RegisterPage() {
         <input
           type="text"
           className={RegisterPageCSS.address}
-          placeholder="enter your address"
+          placeholder="Enter your address"
           id="address"
           name="address"
           value={formData.address}

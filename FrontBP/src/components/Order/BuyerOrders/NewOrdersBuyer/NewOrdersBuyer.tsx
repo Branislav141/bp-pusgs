@@ -110,7 +110,7 @@ const BuyerOrdersTable: React.FC = () => {
                     ))}
 
                     <tr>
-                      <td>
+                      <td colSpan={4}>
                         <button
                           onClick={() => cancelOrder(order.id)}
                           className={NewBuyerOrdersCSS["cancel-button"]}

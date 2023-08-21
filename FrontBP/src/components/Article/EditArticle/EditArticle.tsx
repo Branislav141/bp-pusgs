@@ -134,7 +134,10 @@ const EditArticle: React.FC = () => {
           <label>Upload New Image:</label>
           <input type="file" accept="image/*" onChange={handleImageChange} />
         </div>
-        <button type="submit">Save Changes</button>
+        <br />
+        <button className={EditArticleCSS["save-button"]} type="submit">
+          Save Changes
+        </button>
       </form>
     </div>
   );

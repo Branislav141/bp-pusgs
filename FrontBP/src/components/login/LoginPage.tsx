@@ -6,7 +6,6 @@ import { setToken, setUserAccountType } from "../../store/useTokenStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 
 const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
   onLogin,
@@ -76,6 +75,7 @@ const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
 
   return (
     <div>
+      <h1 className={LoginPageCSS["naslov"]}>Login page</h1>
       <form onSubmit={handleLogin} className={LoginPageCSS.Form}>
         <br />
 
@@ -101,7 +101,7 @@ const LoginPage: React.FC<{ onLogin: (email: string) => void }> = ({
 
         <input
           type="submit"
-          className={LoginPageCSS.loginbutton}
+          className={LoginPageCSS["loginbutton"]}
           value="Login"
         />
         <hr></hr>
