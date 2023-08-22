@@ -4354,24 +4354,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\BP Doktor\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\brani\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj",
+      "projectUniqueName": "C:\\Users\\brani\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj",
       "projectName": "EmailService",
-      "projectPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj",
-      "packagesPath": "C:\\Users\\BP Doktor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BP Doktor\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\obj\\",
+      "projectPath": "C:\\Users\\brani\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\EmailService.csproj",
+      "packagesPath": "C:\\Users\\brani\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\brani\\Documents\\GitHub\\bp-pusgs\\BackendBP\\EmailSender\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\BP Doktor\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\brani\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4422,7 +4417,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

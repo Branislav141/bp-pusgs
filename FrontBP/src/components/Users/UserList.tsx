@@ -106,22 +106,7 @@ function UserList() {
                     </button>
                   </div>
                 )}
-                {user.accountStatus === "Approved" && (
-                  <button
-                    className={styles.userListButton}
-                    onClick={() => declineUser(user.email)}
-                  >
-                    Decline
-                  </button>
-                )}
-                {user.accountStatus === "Declined" && (
-                  <button
-                    className={styles.userListButton}
-                    onClick={() => approveUser(user.email)}
-                  >
-                    Approve
-                  </button>
-                )}
+               
               </td>
             </tr>
           ))}
